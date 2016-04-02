@@ -1,0 +1,39 @@
+body {
+	font-size: 16px;
+	font-style: Arial, serif, Times New Roman, sans-serif;
+}
+
+a {
+	color: blue;
+	text-decoration: italic;
+}
+
+a:visited {
+	color: red;
+	text-decoration: italic;
+}
+
+a:hover {
+	color: lightblue;
+	text-decoration: italic;
+}
+
+f1 {
+	font-size: 12px;
+}
+
+table, th, td {
+	border: 0;
+	width=100%;
+	
+}
+
+th {
+	text-align: center;
+	vertical-align: center;
+	font-size: 24px;
+}
+td {
+	text-align: center;
+}
+
