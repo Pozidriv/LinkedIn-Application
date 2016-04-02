@@ -1,3 +1,40 @@
 <html>
-
+  <head>
+    <title>Login or Register</title>
+    <link href="http://www.pozidrivtotheskies.site90.net/general.css" rel="stylesheet" type="text/css">
+    <meta charset="utf-8">
+  </head>
+  
+  <!-- Note that all the attributes of the tables will have to be put in a css file !-->
+  <body>
+    <table width=100%>
+    <tr>
+      <th text-align=center>
+          Login
+      </th>
+      <th text-align=center>
+        Register
+      </th>
+    </tr>
+    <tr>
+      <td>
+        <form name="input" action="login.c" method="post">
+          Username: <input type="text" name="user"><br>
+          Password: <input type="text" name="passwd"><br>
+          <input type="submit" value="Login">
+        </form>
+      </td>
+      <td>
+        <form name="input" action="register.c" method="post">
+          Full Name: <input type="text" name="fullname"><br>
+          Job Description: <input type="text" name="jobdesc"><br>
+          Username: <input type="text" name="user"><br>
+          Password: <input type="text" name="passwd"><br>
+          <input type="submit" value="Register">
+        </form>
+      </td>
+    </tr>
+  
+  </body>
 </html>
+
