@@ -6,3 +6,11 @@ I will try to upload the files on Saturday. In the meantime, the assignment desc
 http://pozidrivtotheskies.site90.net/Courses&stuff/COMP206/a4.pdf
 
 Also, a link to the css stylesheet: http://pozidrivtotheskies.site90.net/general.css
+
+Workload separation: 
+
+Samuel: dashboard.html, dashboard.py, status.py, register.c
+
+Dahana: makefriends.py, makeafriend.html, seefriends.html, seefriends.c
+
+Pozidriv: login.c, login.html, newfriends.py
