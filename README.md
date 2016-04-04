@@ -7,7 +7,8 @@ http://pozidrivtotheskies.site90.net/Courses&stuff/COMP206/a4.pdf
 
 The css stylesheet is here: http://cs.mcgill.ca/~ytamit/global.css
 
-NOTE: do not forget to compile on the freebsd or cgi server; it won't work otherwise.
+NOTES: do not forget to compile on the freebsd or cgi server; it won't work otherwise.
+Put all your binary .cgi executables in the cgi-bin directory
 
 Workload separation: 
 
