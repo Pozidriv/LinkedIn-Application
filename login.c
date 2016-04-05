@@ -2,6 +2,9 @@
 #include<string.h>
 #include<stdlib.h>
 
+//Verifies that the inputed username/password pair is in the database
+int isValid(char *usr, char *pwd);
+
 //displays the error page
 void displayError(void);
 
@@ -29,9 +32,36 @@ int main()
 	for (a=0; *(ptr+a)!='&'; a++) {
 		inputPasswd[a] = *(ptr+a); //not sure this will work
 	}
+	//at this point, we have the inputed password/username.
+
+	if (isValid(inputUsrname, inputPasswd)) {
+		setenv("usr", usr, 1);
+		system("./cgi-bin/dashboard.cgi $usr");
+	}
+	else displayError();
 	
-	if (strcmp(
-	displayError();
+	return 0;
+}
+
+int isValid(char *usr, char *pwd)
+{
+	char *ptr;
+	char line[100];
+	FILE *f;
+
+	f = fopen(user.txt, "rt");
+	fgets(line, 99, f);
+
+	while (line != 0) {
+		if (strcmp(line, usr) == 0) return 1;
+		else {
+			fgets(line, 99, f);
+			fgets(line, 99, f);
+			fgets(line, 99, f);
+			fgets(line, 99, f);
+			// user.txt has 4 lines per user :P
+		}
+	}
 	return 0;
 }
 
