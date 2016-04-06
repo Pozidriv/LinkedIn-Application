@@ -5,6 +5,21 @@
 //Verifies that the inputed username/password pair is in the database
 int isValid(char *usr, char *pwd);
 
+/*
+ * Input: str, a string in cgi encoding format
+ * 	  nameOfVar, a string representing the name of the variable
+ * 	  dest, the array where the obtained variable value will be stored
+ *
+ * The function fills dest with the value of the variable whose name is given 
+ * in nameOfVar and value contained in str.
+ * It does the following: strstr to find the variable name in 
+ * str, read the value after the =, copy it to dest.
+ * NOTE: if the value name is not in str, it puts a null in dest.
+ *
+ ***************************MAKE A LIBRARY***************************
+ */
+void getVariable(char *str, char *nameOfVar, char *dest);
+
 //displays the error page
 void displayError(void);
 
@@ -100,3 +115,7 @@ void unencode(char *src, char *last, char *dest)
  *++dest = '\0';
 }
 
+void getVariable(char *str, char *varName, char *dest)
+{
+
+}
