@@ -91,10 +91,13 @@ int listFriends(char *user, int i){
 
 	while(friend != NULL){
 
-	printf(" <input type="radio" name="friend" value="
+		printf(" <input type=\"radio\" name=\"friend\" value=\"%s\">%s<br /> ", friend, friend);
+	
+		friend = strtok(NULL,",");
 
 	}
 
+	prinf(" <input type=\"submit\" value=\" See your friend's page\" ");
 
 
 }
@@ -115,7 +118,6 @@ int listFriends(char *user, int i){
 
 
 	
-
 
 
 
