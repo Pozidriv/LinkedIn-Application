@@ -5,7 +5,6 @@
 //Verifies that the inputed username/password pair is in the database
 int isValid(char *usr, char *pwd);
 
-//SEG FAULT IN THIS FUNCTION
 void getVariable(char *str, char *nameOfVar, char *dest);
 
 //displays the error page
@@ -23,7 +22,7 @@ int main(int argc, char *argv[])
 	int a,n;
 
 	/*************FOR TESTING ONLY*******************/
-	setenv("CONTENT_LENGTH", "18", 1);
+	//setenv("CONTENT_LENGTH", "18", 1);
 	/************************************************/
 
 	if (getenv("CONTENT_LENGTH") != NULL) {
@@ -35,18 +34,19 @@ int main(int argc, char *argv[])
 	}
 
 	printf("%s%c%c\n","Content-Type:text/html;charset=iso-8859-1",13,10);
-	printf("<body>%d</body>\n", n);
+	printf("<body>%d<br>\n", n);
 
-	//NOTE: we read from INPUT, ie what the user types
-	memcpy(input, argv[0], n+1);
-	input[n+1] = 0;
-	unencode(input, &input[n], data);
-	//good up to here
+	fgets(input, n+1, stdin);
+	unencode(input, input+n, data);
+	data[n] = 0;
+	printf("%s<body>\n", data);
 
-	getVariable(input, "user", inputUsrname);
-	printf("we have user\n");
-	getVariable(input, "passwd", inputPasswd);
-	printf("we have pass\n");
+
+	getVariable(data, "user", inputUsrname);
+	printf("<br>we have user\n");
+	getVariable(data, "passwd", inputPasswd);
+	printf("<br>we have pass\n");
+	//should be good up to here
 	//at this point, we have the inputed password/username.
 
 	if (isValid(inputUsrname, inputPasswd)) {
@@ -55,7 +55,7 @@ int main(int argc, char *argv[])
 		system("./cgi-bin/dashboard.cgi $usr");
 	}
 	else displayError();
-	
+
 	return 0;
 }
 
@@ -105,7 +105,8 @@ void unencode(char *src, char *last, char *dest)
      int code;
      if(sscanf(src+1, "%2x", &code) != 1) code = '?';
      *dest = code;
-     src +=2; }
+     src +=2; 
+   }
    else
      *dest = *src;
  *dest = '\n';
@@ -124,24 +125,34 @@ void unencode(char *src, char *last, char *dest)
  * NOTE: if the value name is not in str, it puts a null in dest.
  * IMPORTANT: dest needs to be empty
  *
+ * TESTED, works well.
  ***************************MAKE A LIBRARY***************************
  */
 void getVariable(char *str, char *varName, char *dest)
 {
 	char *ptr, *tmp;
-	int sizeVar = strlen(varName) + 1;// +1 for the '=' char
-	char var[sizeVar + 1];
+	int sizeVar = strlen(varName)+1;// +1 for the '=' char
+	char var[sizeVar + 2];
 
-	printf("memcpy");
-	memcpy(var, varName, sizeVar-2);
-	var[sizeVar-1] = '=';
-	var[sizeVar] = 0;
+	printf("<br>varName: %s; sizeVar: %d", varName, sizeVar);
+	strncpy(var, varName, sizeVar);
+	strncat(var, "=", 1);//why is there no '=' at the end of the string?
+	var[sizeVar+1] = 0;
 	//we now have a string of the form "variable="
+
+	printf("<br>%s", var);
+	printf("<br>%s", str);
+	if (strstr(str, var) == 0) return;
 
 	ptr = strstr(str, var) + sizeVar;
 	tmp = ptr;
-	while (*ptr != '&') {
+	
+
+	while (*ptr != '&' && *ptr != 0){
 		strncat(dest, ptr, 1);
+		ptr++; //AGAIN DO NOT FORGET THIS LINE
 	}
 	dest[ptr-tmp+1] = 0; //this line might be problematic
+
 }
+
