@@ -2,7 +2,7 @@
 A web based LinkedIn mini system
 
 The website can be found here for now: http://cs.mcgill.ca/~ytamit/ 
-I will try to upload the files on Saturday. In the meantime, the assignment description can be found here:
+The assignment description can be found here:
 http://pozidrivtotheskies.site90.net/Courses&stuff/COMP206/a4.pdf
 
 The css stylesheet is here: http://cs.mcgill.ca/~ytamit/global.css
