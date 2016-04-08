@@ -1,18 +1,18 @@
 #include<stdio.h>
 #include<string.h>
 #include<stdlib.h>
+#include "decd_post.h"
+
+/************************************************************************/
 
 //Verifies that the inputed username/password pair is in the database
 int isValid(char *usr, char *pwd);
 
-void getVariable(char *str, char *nameOfVar, char *dest);
-
 //displays the error page
 void displayError(void);
 
-//imported from https://www.cs.tut.fi/~jkorpela/forms/cgic.html
-//translates the input into a readable format (with special characters still)
-void unencode(char *src, char *last, char *dest);
+/*************************************************************************/
+
 
 int main(int argc, char *argv[])
 {
@@ -94,65 +94,5 @@ void displayError(void)
 	printf("<a href=\"login.html\">here</a>, or go ");
 	printf("back to the <a href=\"index.html\">Home Page</a>\n");
 	printf("</body>\n");
-}
-
-void unencode(char *src, char *last, char *dest)
-{
- for(; src != last; src++, dest++)
-   if(*src == '+')
-     *dest = ' ';
-   else if(*src == '%') {
-     int code;
-     if(sscanf(src+1, "%2x", &code) != 1) code = '?';
-     *dest = code;
-     src +=2; 
-   }
-   else
-     *dest = *src;
- *dest = '\n';
- *++dest = '\0';
-}
-
-/*
- * Input: str, a string in cgi encoding format
- * 	  nameOfVar, a string representing the name of the variable
- * 	  dest, the array where the obtained variable value will be stored
- *
- * The function fills dest with the value of the variable whose name is given 
- * in nameOfVar and value contained in str.
- * It does the following: strstr to find the variable name in 
- * str, read the value after the =, copy it to dest.
- * NOTE: if the value name is not in str, it puts a null in dest.
- * IMPORTANT: dest needs to be empty
- *
- * TESTED, works well.
- ***************************MAKE A LIBRARY***************************
- */
-void getVariable(char *str, char *varName, char *dest)
-{
-	char *ptr, *tmp;
-	int sizeVar = strlen(varName)+1;// +1 for the '=' char
-	char var[sizeVar + 2];
-
-	printf("<br>varName: %s; sizeVar: %d", varName, sizeVar);
-	strncpy(var, varName, sizeVar);
-	strncat(var, "=", 1);//why is there no '=' at the end of the string?
-	var[sizeVar+1] = 0;
-	//we now have a string of the form "variable="
-
-	printf("<br>%s", var);
-	printf("<br>%s", str);
-	if (strstr(str, var) == 0) return;
-
-	ptr = strstr(str, var) + sizeVar;
-	tmp = ptr;
-	
-
-	while (*ptr != '&' && *ptr != 0){
-		strncat(dest, ptr, 1);
-		ptr++; //AGAIN DO NOT FORGET THIS LINE
-	}
-	dest[ptr-tmp+1] = 0; //this line might be problematic
-
 }
 
