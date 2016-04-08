@@ -6,6 +6,7 @@
 /************************************************************************/
 
 //Verifies that the inputed username/password pair is in the database
+//Tested, works well
 int isValid(char *usr, char *pwd);
 
 //displays the error page
@@ -25,6 +26,8 @@ int main(int argc, char *argv[])
 	//setenv("CONTENT_LENGTH", "18", 1);
 	/************************************************/
 
+	//-----Checking if form data exists-----
+
 	if (getenv("CONTENT_LENGTH") != NULL) {
 		n = atoi(getenv("CONTENT_LENGTH"));
 	}
@@ -33,58 +36,99 @@ int main(int argc, char *argv[])
 		return;
 	}
 
+	//--------------------------------------
+
 	printf("%s%c%c\n","Content-Type:text/html;charset=iso-8859-1",13,10);
 	printf("<body>%d<br>\n", n);
 
+	//--------Retrieving form data----------
+
 	fgets(input, n+1, stdin);
 	unencode(input, input+n, data);
-	data[n] = 0;
-	printf("%s<body>\n", data);
 
+	//--------------------------------------
+
+	printf("%s\n", data);//debugging
+
+	//------Retrieving variable values------
 
 	getVariable(data, "user", inputUsrname);
-	printf("<br>we have user\n");
+	printf("<br>we have user\n");//debugging
 	getVariable(data, "passwd", inputPasswd);
-	printf("<br>we have pass\n");
-	//should be good up to here
+	printf("<br>we have pass\n");//debugging
+	//good up to here
 	//at this point, we have the inputed password/username.
-
+	isValid(inputUsrname, inputPasswd);
+/*
 	if (isValid(inputUsrname, inputPasswd)) {
+
 		printf("user/pass valid\n");
 		setenv("usr", inputUsrname, 1);
 		system("./cgi-bin/dashboard.cgi $usr");
+
 	}
 	else displayError();
-
+*/
 	return 0;
 }
 
+/*
+ * Compares usr with each username in users.txt
+ * If they are the same, it compares the password of that username and pwd,
+ * and returns 1 if they are the same, else returns 0.
+ * If it is not the same, it continues until it reaches the end of file.
+ ****** 
+ * ptr is used because getline takes a pointer to string as input.
+ ***
+ * in the while loop, strncmp is used because getline includes the \n char
+ * when copying the line into line. We thus consider only the first strlen(line)-1
+ * characters to make sure the actual username is being compared. 
+ ***
+ * the string length is also compared to make sure the strings really are the same
+ */
 int isValid(char *usr, char *pwd)
 {
 	char *ptr;
 	char line[100];
+	size_t n = 99;
 	FILE *f;
 
-	f = fopen("./users.txt", "rt");
-	fgets(line, 99, f);
+	ptr = line;
 
-	while (line != 0) {
-		if (strcmp(line, usr) == 0) return 1;
-		else {
-			fgets(line, 99, f);
-			fgets(line, 99, f);
-			fgets(line, 99, f);
-			fgets(line, 99, f);
-			// user.txt has 4 lines per user :P
-		}
-	}
+	//something is problematic with this line
+	f = fopen("./users.txt", "rt");
+
+	while (getline(&ptr, &n, f) > 0) {
+		printf("line: %s\n", line);
+                if (strncmp(line, usr, strlen(line)-1) == 0 &&
+		    strlen(line)-1 == strlen(usr)              ) {
+			getline(&ptr, &n, f);
+			if (strncmp(line, pwd, strlen(line)-1) == 0 &&
+			    strlen(line)-1 == strlen(pwd)              ) {
+                        	fclose(f);
+                        	return 1;
+			}
+			else {
+				fclose(f);
+				return 0;
+			}
+                }
+                else {
+                        getline(&ptr, &n, f);
+                        getline(&ptr, &n, f);
+                        getline(&ptr, &n, f);
+                        printf("line is now: %s\n", line);//debugging
+                        // user.txt has 4 lines per user :P
+                }
+        }
+
+        fclose(f);
 	return 0;
 }
 
 void displayError(void)
 {
 
-	printf("%s%c%c\n","Content-Type:text/html;charset=iso-8859-1",13,10);
 	printf("<head>\n<title>Authentification Failed</title>\n");
 	printf("<link href=\"http://cs.mcgill.ca/~ytamit/global.css\" rel=\"stylesheet\" type=\"text/css\">\n");
 	printf("</head>\n\n<body>\n");
