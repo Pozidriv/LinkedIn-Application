@@ -58,8 +58,7 @@ int main(int argc, char *argv[])
 	printf("<br>we have pass\n");//debugging
 	//good up to here
 	//at this point, we have the inputed password/username.
-	isValid(inputUsrname, inputPasswd);
-/*
+
 	if (isValid(inputUsrname, inputPasswd)) {
 
 		printf("user/pass valid\n");
@@ -68,7 +67,7 @@ int main(int argc, char *argv[])
 
 	}
 	else displayError();
-*/
+
 	return 0;
 }
 
@@ -95,8 +94,7 @@ int isValid(char *usr, char *pwd)
 
 	ptr = line;
 
-	//something is problematic with this line
-	f = fopen("./users.txt", "rt");
+	f = fopen("../users.txt", "rt");//lmao, one '.' can prevent a crash!
 
 	while (getline(&ptr, &n, f) > 0) {
 		printf("line: %s\n", line);
@@ -117,7 +115,6 @@ int isValid(char *usr, char *pwd)
                         getline(&ptr, &n, f);
                         getline(&ptr, &n, f);
                         getline(&ptr, &n, f);
-                        printf("line is now: %s\n", line);//debugging
                         // user.txt has 4 lines per user :P
                 }
         }
@@ -135,8 +132,8 @@ void displayError(void)
 	printf("<h1>Error</h1>\n");
 	printf("<p>The credentials you have entered are invalid.<br>\n");
 	printf("Please try again by clicking ");
-	printf("<a href=\"login.html\">here</a>, or go ");
-	printf("back to the <a href=\"index.html\">Home Page</a>\n");
+	printf("<a href=\"http://cs.mcgill.ca/~ytamit/login.html\">here</a>, or ");
+	printf("go back to the <a href=\"index.html\">Home Page</a>\n");
 	printf("</body>\n");
 }
 
