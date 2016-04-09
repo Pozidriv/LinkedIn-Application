@@ -20,53 +20,57 @@ int main(int argc, char *argv[])
 	char input[5000], data[5000];
 	char inputUsrname[51], inputPasswd[51];
 	char *ptr;
-	int a,n;
+	int n;
 
 	/*************FOR TESTING ONLY*******************/
 	//setenv("CONTENT_LENGTH", "18", 1);
 	/************************************************/
 
+	printf("%s%c%c\n","Content-Type:text/html;charset=iso-8859-1",13,10);
+	printf("<body>\n");
+
 	//-----Checking if form data exists-----
 
 	if (getenv("CONTENT_LENGTH") != NULL) {
 		n = atoi(getenv("CONTENT_LENGTH"));
-	}
-	else {
-		printf("Form data does not exist!\n");
+	} else {
+		printf("Form data does not exist!</body>\n");
 		return;
 	}
 
 	//--------------------------------------
 
-	printf("%s%c%c\n","Content-Type:text/html;charset=iso-8859-1",13,10);
-	printf("<body>%d<br>\n", n);
 
 	//--------Retrieving form data----------
 
-	fgets(input, n+1, stdin);
-	unencode(input, input+n, data);
+	fgets(input, n + 1, stdin);
+	unencode(input, input + n, data);
 
 	//--------------------------------------
 
-	printf("%s\n", data);//debugging
+	//printf("%s\n", data);//debugging
 
 	//------Retrieving variable values------
 
 	getVariable(data, "user", inputUsrname);
-	printf("<br>we have user\n");//debugging
+	//printf("<br>we have user\n");//debugging
 	getVariable(data, "passwd", inputPasswd);
-	printf("<br>we have pass\n");//debugging
-	//good up to here
+	//printf("<br>we have pass\n");//debugging
 	//at this point, we have the inputed password/username.
 
-	if (isValid(inputUsrname, inputPasswd)) {
+	//--------------------------------------
 
+
+	//------Checking user/password pair-----
+
+	if (isValid(inputUsrname, inputPasswd)) {
 		printf("user/pass valid\n");
 		setenv("usr", inputUsrname, 1);
 		system("./cgi-bin/dashboard.cgi $usr");
-
 	}
 	else displayError();
+
+	//--------------------------------------
 
 	return 0;
 }
@@ -97,28 +101,27 @@ int isValid(char *usr, char *pwd)
 	f = fopen("../users.txt", "rt");//lmao, one '.' can prevent a crash!
 
 	while (getline(&ptr, &n, f) > 0) {
-		printf("line: %s\n", line);
-                if (strncmp(line, usr, strlen(line)-1) == 0 &&
-		    strlen(line)-1 == strlen(usr)              ) {
+		//printf("line: %s\n", line);//debugging
+                if (strncmp(line, usr, strlen(line)-1) == 0
+		  && strlen(line)-1 == strlen(usr)
+		) {
 			getline(&ptr, &n, f);
-			if (strncmp(line, pwd, strlen(line)-1) == 0 &&
-			    strlen(line)-1 == strlen(pwd)              ) {
+			if (strncmp(line, pwd, strlen(line)-1) == 0
+			  && strlen(line)-1 == strlen(pwd)
+			) {
                         	fclose(f);
                         	return 1;
-			}
-			else {
+			} else {
 				fclose(f);
 				return 0;
 			}
-                }
-                else {
+                } else {
                         getline(&ptr, &n, f);
                         getline(&ptr, &n, f);
                         getline(&ptr, &n, f);
                         // user.txt has 4 lines per user :P
                 }
         }
-
         fclose(f);
 	return 0;
 }
