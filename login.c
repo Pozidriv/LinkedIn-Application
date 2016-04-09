@@ -67,10 +67,10 @@ int main(int argc, char *argv[])
 	//printf("usr: %s; pwd: %s", inputUsrname, inputPasswd);//debugging
 	if (isValid(inputUsrname, inputPasswd)) {
 		printf("user/pass valid\n");//debugging
-		//setenv("usr", inputUsrname, 1);
-		//system("./dashboard.cgi $usr");
-		arr[0] = inputUsrname;
-		execv("./dashboard.cgi", arr);
+		setenv("usr", inputUsrname, 1);
+		system("./dashboard.cgi $usr");
+		//arr[0] = inputUsrname;
+		//execv("./dashboard.cgi", arr);
 	}
 	else displayError();
 
