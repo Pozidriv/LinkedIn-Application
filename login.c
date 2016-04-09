@@ -20,6 +20,7 @@ int main(int argc, char *argv[])
 	char input[5000], data[5000];
 	char inputUsrname[51], inputPasswd[51];
 	char *ptr;
+	char *arr[1];
 	int n;
 
 	/*************FOR TESTING ONLY*******************/
@@ -63,10 +64,13 @@ int main(int argc, char *argv[])
 
 	//------Checking user/password pair-----
 
+	//printf("usr: %s; pwd: %s", inputUsrname, inputPasswd);//debugging
 	if (isValid(inputUsrname, inputPasswd)) {
-		printf("user/pass valid\n");
-		setenv("usr", inputUsrname, 1);
-		system("./cgi-bin/dashboard.cgi $usr");
+		printf("user/pass valid\n");//debugging
+		//setenv("usr", inputUsrname, 1);
+		//system("./dashboard.cgi $usr");
+		arr[0] = inputUsrname;
+		execv("./dashboard.cgi", arr);
 	}
 	else displayError();
 
@@ -105,10 +109,12 @@ int isValid(char *usr, char *pwd)
                 if (strncmp(line, usr, strlen(line)-1) == 0
 		  && strlen(line)-1 == strlen(usr)
 		) {
+			//printf("usr is the same\n");//debugging
 			getline(&ptr, &n, f);
 			if (strncmp(line, pwd, strlen(line)-1) == 0
-			  && strlen(line)-1 == strlen(pwd)
+			  && strlen(line) == strlen(pwd)
 			) {
+				//printf("pwd is the same");//debugging
                         	fclose(f);
                         	return 1;
 			} else {
