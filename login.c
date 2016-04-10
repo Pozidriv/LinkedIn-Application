@@ -140,7 +140,7 @@ void displayError(void)
 	printf("<p>The credentials you have entered are invalid.<br>\n");
 	printf("Please try again by clicking ");
 	printf("<a href=\"http://cs.mcgill.ca/~ytamit/login.html\">here</a>, or ");
-	printf("go back to the <a href=\"index.html\">Home Page</a>\n");
+	printf("go back to the <a href=\"../index.html\">Home Page</a>\n");
 	printf("</body>\n");
 }
 
