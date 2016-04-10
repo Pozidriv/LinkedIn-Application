@@ -1,42 +1,48 @@
 <html>
   <head>
     <title>Login or Register</title>
-    <link href="http://cs.mcgill.ca/~ytamit/global.css" rel="stylesheet" type="text/css">
+    <link href="http://cs.mcgill.ca/~djosep13/LinkedIn/global.css" rel="stylesheet" type="text/css">
     <meta charset="utf-8">
   </head>
   
-  <!-- Note that all the attributes of the tables will have to be put in a css file !-->
+
   <body>
-    <table width=100%>
+        <h1 id="linkedin">LinkedIn</h1>
+
+      <br/>
+    <table id="logtitletable">
     <tr>
-      <th text-align=center>
+      <th id="logheader">
           Login
       </th>
-      <th text-align=center>
+      <th id="logheader">
         Register
       </th>
     </tr>
     <tr>
-      <td>
+      <td id="loginput">
         <form name="input" action="cgi-bin/login.cgi" method="post">
           Username: <input type="text" name="user"><br>
-          Password: <input type="text" name="passwd"><br>
+          Password : <input type="text" name="passwd"><br>
           <input type="submit" value="Login">
         </form>
       </td>
-      <td>
-        <form name="input" action="cgi-bin/register.cgi" method="post">
+      <td id="loginput">
+        <form name="input" action="cgi-bin/register.cgi" method="post"><br/>
           Full Name: <input type="text" name="fullname"><br>
           Job Description: <input type="text" name="jobdesc"><br>
           Username: <input type="text" name="user"><br>
-          Password: <input type="text" name="passwd"><br>
+          Password :<input type="text" name="passwd"><br/>
           <input type="submit" value="Register">
         </form>
       </td>
     </tr>
   </table>
-  
-  <f1><a href="./index.html">Back to Home Page</a></f1>
+    
+  <br/><br/><br/>
+  <a href="./index.html">Back to Home Page</a>
   </body>
 </html>
+
+
 

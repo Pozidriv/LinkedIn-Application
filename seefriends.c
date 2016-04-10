@@ -12,27 +12,6 @@ void listFriends(int i, char *user);
 
 // ------------------------------------------------------------------------
 
-/* Youri
- * About the generated seefriends.html page:
- * 1) There is a closing </form> tag, but no opening one. It is in the 
- * opening tag that you put the attribute "action", that defines what 
- * to do when the submit button is clicked. (ie what executable to run)
- * 2) When looking at the source code, you can see that there are two 
- * html sections, which is something you want to avoid. (it's probably 
- * nothing important, but usually there is only one html section per page)
- * 3) Only executables should be placed in the cgi-bin directory. It's 
- * very confusing to look for an html page in a cgi script dir ^^.
- * 4) What exactly do you mean by "clicking on see a friends does not 
- * work"? If by that you mean clicking on select a friend, 1) should fix 
- * the problem. Else, I have no clue what the problem is...
- * 5) If you want to add the css stylesheet, you need to include a line 
- * <link href="http://cs.mcgill.ca/~ytamit/global.css" rel="stylesheet" 
- * type="text/css">
- * in the head section of the generated html page.
- *
- * Hope this helps! :)
- */
-
 int main(int argc, char *argv[]){
  
     if(argc==1){
@@ -200,7 +179,7 @@ void listFriends(int i, char *user){
    	}
     
 
-	printf("<form name=\"input\" action=\"http://cs.mcgill.ca/~djosep13/cgi-bin/seefriends.cgi\" method =\"post\">");
+	//printf("<form name=\"input\" action=\"http://cs.mcgill.ca/~djosep13/cgi-bin/seefriends.cgi\" method =\"post\">");
 
 
 	while(friend != NULL){
@@ -285,3 +264,23 @@ void gotoFriend(char *friend){
 }
 
 // ------------------------------------------------------------------------
+
+
+
+
+
+
+
+
+
+
+
+	
+
+
+
+
+
+
+
+
