@@ -20,22 +20,20 @@ int main(int argc, char *argv[])
 	char input[5000], data[5000];
 	char inputUsrname[51], inputPasswd[51];
 	char *ptr;
-	char *arr[1];
+	//char *arr[1];
 	int n;
 
 	/*************FOR TESTING ONLY*******************/
 	//setenv("CONTENT_LENGTH", "18", 1);
 	/************************************************/
 
-	printf("%s%c%c\n","Content-Type:text/html;charset=iso-8859-1",13,10);
-	printf("<body>\n");
 
 	//-----Checking if form data exists-----
 
 	if (getenv("CONTENT_LENGTH") != NULL) {
 		n = atoi(getenv("CONTENT_LENGTH"));
 	} else {
-		printf("Form data does not exist!</body>\n");
+		displayError();
 		return;
 	}
 
@@ -66,13 +64,12 @@ int main(int argc, char *argv[])
 
 	//printf("usr: %s; pwd: %s", inputUsrname, inputPasswd);//debugging
 	if (isValid(inputUsrname, inputPasswd)) {
-		printf("user/pass valid\n");//debugging
+		//printf("user/pass valid\n");//debugging
 		setenv("usr", inputUsrname, 1);
 		system("./dashboard.cgi $usr");
 		//arr[0] = inputUsrname;
 		//execv("./dashboard.cgi", arr);
-	}
-	else displayError();
+	} else displayError();
 
 	//--------------------------------------
 
@@ -135,6 +132,7 @@ int isValid(char *usr, char *pwd)
 void displayError(void)
 {
 
+	printf("%s%c%c\n","Content-Type:text/html;charset=iso-8859-1",13,10);
 	printf("<head>\n<title>Authentification Failed</title>\n");
 	printf("<link href=\"http://cs.mcgill.ca/~ytamit/global.css\" rel=\"stylesheet\" type=\"text/css\">\n");
 	printf("</head>\n\n<body>\n");
