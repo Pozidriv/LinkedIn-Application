@@ -1,0 +1,48 @@
+body {
+
+    background-color : #72B2AA;
+
+
+}
+
+table {
+    border-bottom: 4px solid black;
+    border-top: 4px solid black;
+    width:100%;
+    background-color: #B9CDE5;
+}
+
+tr, td {
+    text-align: center;
+}
+
+h1{
+    text-align: center;
+    font-size: 50px;
+    font-family: "Times New Roman", Times, serif;
+    font-weight: bold;
+}
+
+h2 {
+    text-align: center;
+    font-size: 25px;
+    font-family: "Times New Roman", Times, serif;
+    font-weight: bold;
+}
+
+h3 {
+    text-align: center;
+    font-size: 30px;
+    font-family: "Times New Roman", Times, serif;
+    font-weight: bold;
+    
+}
+
+h4 {
+    text-align:left;
+    font-size: 17px;
+    font-family: "Times New Roman", Times, serif;
+    font-weight: bold;
+    text-decoration: underline;
+}
+
