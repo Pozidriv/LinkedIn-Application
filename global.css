@@ -28,10 +28,14 @@ h1 {
 p {
 	text-align: left;
 	font-size: 20px;
+	padding-bottom: 1%;
+	padding-top: 1%;
 }
 
 f1 {
-	font-size: 12px;
+	font-size: 16px;
+	font-color: red;
+	padding-left: 15%;
 }
 
 table, th, td {
@@ -72,4 +76,12 @@ input[type=submit] {
 input[type=submit]:hover {
 	background-color: gray;
 	color: white;
+}
+
+#footer {
+	padding-top: 5%;
+	padding-bottom: 2%;
+	padding-left: 5%;
+	margin: 5%;
+	bottom: 2%;
 }
