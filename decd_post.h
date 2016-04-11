@@ -4,6 +4,8 @@
  * Translates the input into a readable format, from the address pointed to 
  * by src to the address pointed by last, and stores the result into dest.
  * (keeps the '&' and '=')
+ *
+ * Imported from https://www.cs.tut.fi/~jkorpela/forms/cgic.html
  */
 void unencode(char *src, char *last, char *dest);
 
