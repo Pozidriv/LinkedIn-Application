@@ -279,23 +279,43 @@ void friendProfile(char *friend){
 
 
 	else {	
-     
-                // To be put in a gorgeous table soon
-            
-                //Username
-                printf("%s <br/>", line);
-            
-                // Password
-                fgets(line, 2047, profile_ptr);
-            
-                // Full Name
-                fgets(line, 2047, profile_ptr);
-                printf("%s <br/>", line);
-            
-                // Job Description
-                fgets(line, 2047, profile_ptr);
-                printf("%s <br/>", line);
+ 		    FILE *html_ptr;
+		    char html_line[2048];
+    		    html_ptr = fopen("profile.html", "rt");
+    		    char *putUSERNAME ="USERNAME\n";
+		    char *putFULLNAME ="FULLNAME\n";
+		    char *putJOB = "JOB\n";
 
+		// Currently at username : do fgets twice to go to FULLNAME
+		fgets(line, 2047, profile_ptr);
+		fgets(line, 2047, profile_ptr);
+
+                // To be put in a gorgeous table soon
+
+		while(!feof(html_ptr)){
+			
+			fgets(html_line, 2047, html_ptr);
+			if(strcmp(putUSERNAME, html_line)==0){
+				printf("%s", friend);
+			}
+			
+			else if( strcmp(putFULLNAME, html_line)==0){
+				printf("%s", line);
+			}
+
+			else if( strcmp(putJOB, html_line)==0){
+				fgets(line, 2047, profile_ptr);
+				printf("%s", line);
+			}
+			
+			else{
+				printf("%s", html_line);
+			}
+
+		}
+            
+
+		fclose(html_ptr);
                 fclose(profile_ptr);
                 return;
             }
