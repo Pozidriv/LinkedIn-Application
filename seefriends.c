@@ -5,15 +5,15 @@
 // ------------------------------------------------------------------------
 
 void getFriends(char *user);
-void gotoFriend(char *friend);
+void friendProfile(char *friend);
 void listFriends(int i, char *user);
 
 
 // ------------------------------------------------------------------------
 
-void main(int argc, char *argv[]){
+int main(int argc, char *argv[]){
 
-printf("\"Content-Type:text/html\n\n"); 
+printf("Content-Type:text/html\n\n"); 
     if(argc==1){
         int length = atoi(getenv("CONTENT_LENGTH"));
         char user[60];
@@ -44,7 +44,7 @@ printf("\"Content-Type:text/html\n\n");
                     f++;
                 }
                 else if(numarg>2){
-                    return;
+                    return EXIT_FAILURE;
                 }
                 
                 i++;
@@ -70,10 +70,10 @@ printf("\"Content-Type:text/html\n\n");
 
 	
     else if(argc==3){
-        gotoFriend(argv[2]);
+	friendProfile(argv[2]);
     }
 
-    return;
+    return EXIT_SUCCESS;
 
 }
 
@@ -225,7 +225,7 @@ void listFriends(int i, char *user){
 void friendProfile(char *friend){
     FILE *profile_ptr;
     char line[2048];
-    file_ptr = fopen("users.txt", "rt");
+    profile_ptr = fopen("users.txt", "rt");
 
     // just in case...
 
@@ -233,7 +233,7 @@ void friendProfile(char *friend){
     
         printf("<html>");
     
-        printf("<body style=\"background-color:lightblue;\">");
+        printf("<body style=\"background-color:#72B2AA;\">");
     
         printf("<font face=\"arial\"><font size=\"18\"><center><b><u></br>See a friend page </u></b></center></font></br></br>");
     
@@ -246,14 +246,13 @@ void friendProfile(char *friend){
     }
 
     fgets(line, 2047, profile_ptr);
-    
     while(!feof(profile_ptr)){
-        
+        printf("%s hello\n", line);
         // Not supposed to
         if(line[0]=='\n'){
-            i++;
             continue;
-        }
+    printf("empty?\n");
+	    }
     
         else {
         
@@ -262,9 +261,11 @@ void friendProfile(char *friend){
             if(strcmp(line, friend)!=0){
                 
                 // Go to the next username, four line further
-                for(int i=0; i<4; i++){
-                    fgets(line, 2047, profile_ptr);
-                }
+		int i = 0;
+		while(i<4){
+			fgets(line,2047, profile_ptr);
+			i++;
+		}
                 continue;
             }
         
