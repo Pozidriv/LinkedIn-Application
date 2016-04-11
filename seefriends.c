@@ -246,30 +246,40 @@ void friendProfile(char *friend){
     }
 
     fgets(line, 2047, profile_ptr);
-    while(!feof(profile_ptr)){
-        printf("%s hello\n", line);
-        // Not supposed to
-        if(line[0]=='\n'){
-            continue;
-    printf("empty?\n");
-	    }
-    
-        else {
-        
-        
-        
-            if(strcmp(line, friend)!=0){
-                
-                // Go to the next username, four line further
-		int i = 0;
-		while(i<4){
-			fgets(line,2047, profile_ptr);
-			i++;
+   while(!feof(profile_ptr)){
+	
+// Creating a string without the training linefeed
+	
+	int length = strlen(line)-1;
+	char text[length];
+
+	int i = 0;
+	while(i<length){
+		text[i] = line[i];
+		i++;
+	}
+	text[i] = '\0';
+
+// Comparing the pretty string and the username of the friend
+
+
+	if (strcmp(text, friend) != 0){
+		int j = 0;
+
+// If they do not match, go four lines further
+
+		while(j<4){
+			fgets(line, 2047, profile_ptr);
+			j++;
 		}
-                continue;
-            }
-        
-            else {
+		continue;
+	}
+
+// If they match, prints her/his profile
+
+
+	else {	
+     
                 // To be put in a gorgeous table soon
             
                 //Username
@@ -289,7 +299,6 @@ void friendProfile(char *friend){
                 fclose(profile_ptr);
                 return;
             }
-        }
     }
     return;
 }
@@ -310,6 +319,7 @@ void friendProfile(char *friend){
 
 
 	
+
 
 
 
