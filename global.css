@@ -4,7 +4,7 @@ body {
     padding-top: 5%;
     padding-bottom: 2%;
     margin: 2%;
-    bottom: 2%;
+    bottom: 5%;
 }
 
 #titletable {
@@ -89,6 +89,19 @@ body {
     text-decoration: underline;
 }
 
+#friends {
+    text-align : left;
+    font-size: 30px;
+    font-family: Georgia,Times,"Times New Roman",serif;
+    text-decoration: italic;
+    margin-top : 5%;
+    margin-left: 20%;
+}
+#subfriend  {
+    float :right;
+    margin-right:20%;
+}
+
 /* I guess that these below can be used for all pages */
 a {
     font-size: 20px;
@@ -127,6 +140,11 @@ input[type=submit] {
 input[type=submit]:hover {
     background-color: gray;
     color: white;
+}
+
+input[type=radio]{
+    vertical-align: middle;
+    margin-right:20px;
 }
 
 
