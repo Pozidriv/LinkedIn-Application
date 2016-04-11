@@ -4,8 +4,10 @@ body {
     padding-top: 5%;
     padding-bottom: 2%;
     margin: 2%;
-    bottom: 2%;
+    bottom: 5%;
 }
+
+
 
 #titletable {
     border-bottom: 4px solid black;
@@ -30,6 +32,12 @@ body {
     font-family: "Times New Roman", Times, serif;
     font-weight: bold;
 }
+
+
+
+  /*------------------------------------------------------------*/
+ /*                    For the login page                      */
+/*------------------------------------------------------------*/
 
 #logtitletable {
     width:100%;
@@ -64,6 +72,112 @@ body {
 }
 
 
+
+  /*------------------------------------------------------------*/
+ /*      For the profile of a user : used by seefriends.c      */
+/*------------------------------------------------------------*/
+
+#usertitle {
+    border-bottom: 4px solid black;
+    border-top: 4px solid black;
+    width:80%;
+    margin-left:auto;
+    margin-right:auto;
+    background-color: #B9CDE5;
+}
+
+
+#pic{
+    
+
+    margin-top : 40px;
+    float : right;
+    margin-right:10%;
+    width:17vw;
+    height:15vw;
+    
+    border: 5px solid black;
+ 
+    
+}
+
+#profile {
+    width:55vw;
+    text-align:center;
+    margin-top: 40px;
+    margin-left:14.3%;
+    
+}
+
+#name{
+    
+    text-align: center;
+    font-size: 30px;
+    font-family: "Times New Roman", Times, serif;
+    font-weight: bold;
+
+    background-color:#66B67A;
+    
+    border-bottom: 2px solid black;
+    border-top: 2px solid black;
+    border-left: 2px solid black;
+    border-right: 2px solid black;
+
+}
+
+
+
+#job{
+    
+    font-size: 30px;
+    font-family: Georgia,Times,"Times New Roman",serif;
+    
+    background-color:#ACD6B7;
+    
+    border-bottom: 2px solid black;
+    border-top: 2px solid black;
+    border-left: 2px solid black;
+    border-right: 2px solid black;
+
+}
+
+#statustable{
+
+    width:80%;
+    margin-left:auto;
+    margin-right:auto;
+    margin-top : 40px;
+    
+
+}
+
+#statushead{
+    background-color: #6685B6;
+    font-size: 30px;
+    font-family: "Times New Roman", Times, serif;
+    border-bottom: 2px solid black;
+    border-top: 2px solid black;
+    border-left: 2px solid black;
+    border-right: 2px solid black;
+
+
+}
+
+#status:nth-child(even){
+    
+    background-color: #9FB6DC;
+    font-size: 25px;
+    font-family: "Times New Roman", Times, serif;
+}
+
+#status:nth-child(odd){
+    
+    background-color: #CDDBF2;
+    font-size: 25px;
+    font-family: "Times New Roman", Times, serif;
+}
+
+
 #instr {
     text-align: center;
     font-size: 30px;
@@ -89,7 +203,26 @@ body {
     text-decoration: underline;
 }
 
-/* I guess that these below can be used for all pages */
+  /*------------------------------------------------------------*/
+ /*       For listing the friends : used by seefriends.c       */
+/*------------------------------------------------------------*/
+
+#friends {
+    text-align : left;
+    font-size: 30px;
+    font-family: Georgia,Times,"Times New Roman",serif;
+    text-decoration: italic;
+    margin-top : 5%;
+    margin-left: 20%;
+}
+#subfriend  {
+    float :right;
+    margin-right:20%;
+}
+
+  /*------------------------------------------------------------*/
+ /*                         For each page                      */
+/*------------------------------------------------------------*/
 a {
     font-size: 20px;
     color: darkblue;
@@ -127,6 +260,11 @@ input[type=submit] {
 input[type=submit]:hover {
     background-color: gray;
     color: white;
+}
+
+input[type=radio]{
+    vertical-align: middle;
+    margin-right:20px;
 }
 
 

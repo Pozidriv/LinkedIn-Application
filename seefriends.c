@@ -4,7 +4,6 @@
 
 // ------------------------------------------------------------------------
 
-
 void getFriends(char *user);
 void gotoFriend(char *friend);
 void listFriends(int i, char *user);
@@ -12,8 +11,9 @@ void listFriends(int i, char *user);
 
 // ------------------------------------------------------------------------
 
-int main(int argc, char *argv[]){
- 
+void main(int argc, char *argv[]){
+
+printf("\"Content-Type:text/html\n\n"); 
     if(argc==1){
         int length = atoi(getenv("CONTENT_LENGTH"));
         char user[60];
@@ -44,7 +44,7 @@ int main(int argc, char *argv[]){
                     f++;
                 }
                 else if(numarg>2){
-                    return EXIT_FAILURE;
+                    return;
                 }
                 
                 i++;
@@ -58,7 +58,7 @@ int main(int argc, char *argv[]){
         }
         
         else if(numarg==2){
-            gotoFriend(friend);
+            friendProfile(friend);
         }
         
     }
@@ -73,7 +73,7 @@ int main(int argc, char *argv[]){
         gotoFriend(argv[2]);
     }
 
-    return EXIT_SUCCESS;
+    return;
 
 }
 
@@ -91,7 +91,6 @@ void getFriends(char *user){
 		// just in case...
 
 		if (file_ptr==NULL){
-			printf("<font color=\"lightblue\" \"Content-Type:text/html\n\n </font>");
 
         		printf("<html>");
 
@@ -144,14 +143,14 @@ void listFriends(int i, char *user){
 	FILE *friend_ptr;
 	FILE *html_ptr;
 	char friends[2048];
-    	char html_line[300];
-    	char *friend;
-    	int html_index = 1;
-    	int numfriends = 0;
+    char html_line[300];
+    char *friend;
+    int html_index = 1;
+    int numfriends = 0;
 
 
    	friend_ptr = fopen("friends.txt", "rt");
-    	html_ptr = fopen("seefriends.html", "rt");
+    html_ptr = fopen("seefriends.html", "rt");
 
 
 	fgets(friends, 2047, friend_ptr);
@@ -168,10 +167,10 @@ void listFriends(int i, char *user){
 	friend = strtok(NULL,",");
 
 
-	printf("<font color=\"lightblue\" Content-Type:text/html\n\n </font>");
+	//printf("<font color=\"lightblue\" Content-Type:text/html\n\n </font>");
     
 
-	while(html_index<=14){
+	while(html_index<=32){
         
         	fgets(html_line, 2047, html_ptr);
         	printf("%s\n",html_line);
@@ -184,7 +183,7 @@ void listFriends(int i, char *user){
 
 	while(friend != NULL){
 
-		printf("<input type=\"radio\" name=\"friend\" value=\"%s %s\"><font face=\"arial\"><font size=\"5\"><font color =\"black\"><b>&nbsp;&nbsp;%s</b></font><br/>",user,friend,friend);
+		printf("<input type=\"radio\" name=\"friend\" value=\"%s %s\">&nbsp;&nbsp;%s<br/>",user,friend,friend);
 	
 		friend = strtok(NULL,",");
 		numfriends++;
@@ -208,15 +207,14 @@ void listFriends(int i, char *user){
 		return;
 	}
 
-	 while(html_index<=21 || !feof(html_ptr)){
+    while(!feof(html_ptr)){
         
-        	fgets(html_line, 2047, html_ptr);
-        	printf("%s\n",html_line);
-        	html_index++;
-    	}	
+        fgets(html_line, 2047, html_ptr);
+        printf("%s\n",html_line);
+    }
 
 	fclose(friend_ptr);
-    	fclose(html_ptr);
+    fclose(html_ptr);
 	
 	return;
 }
@@ -224,44 +222,79 @@ void listFriends(int i, char *user){
 
 //---------------------------------------------------------------------------
 
+void friendProfile(char *friend){
+    FILE *profile_ptr;
+    char line[2048];
+    file_ptr = fopen("users.txt", "rt");
 
-void gotoFriend(char *friend){
-    
+    // just in case...
 
-    FILE *html_ptr;
-    char html_line[300];
-    int html_index = 1;
+    if (profile_ptr==NULL){
     
-    html_ptr = fopen("seefriends.html", "rt");
+        printf("<html>");
+    
+        printf("<body style=\"background-color:lightblue;\">");
+    
+        printf("<font face=\"arial\"><font size=\"18\"><center><b><u></br>See a friend page </u></b></center></font></br></br>");
+    
+        printf("<i><h3><font color =\"red\">Error. The filename does not exist. Please tell to your litterate grandmas that a mistake occured </h3></i><br/></font>");
+    
+        printf("</html>");
+    
+    
+        return;
+    }
 
- //   printf("Content-Type:text/html\n\n");
+    fgets(line, 2047, profile_ptr);
     
-    while(html_index<=33){
+    while(!feof(profile_ptr)){
         
-        if(html_index<23){
-            fgets(html_line, 2047, html_ptr);
-            html_index++;
+        // Not supposed to
+        if(line[0]=='\n'){
+            i++;
+            continue;
         }
-        
+    
         else {
-            printf("%s\n",html_line);
-            fgets(html_line, 2047, html_ptr);
-            html_index++;
+        
+        
+        
+            if(strcmp(line, friend)!=0){
+                
+                // Go to the next username, four line further
+                for(int i=0; i<4; i++){
+                    fgets(line, 2047, profile_ptr);
+                }
+                continue;
+            }
+        
+            else {
+                // To be put in a gorgeous table soon
+            
+                //Username
+                printf("%s <br/>", line);
+            
+                // Password
+                fgets(line, 2047, profile_ptr);
+            
+                // Full Name
+                fgets(line, 2047, profile_ptr);
+                printf("%s <br/>", line);
+            
+                // Job Description
+                fgets(line, 2047, profile_ptr);
+                printf("%s <br/>", line);
+
+                fclose(profile_ptr);
+                return;
+            }
         }
     }
-    
-    printf("<center><i><a href=\"http://www.cs.mcgill.ca/~djosep13/cgi-bin/%s.html\" target=\"_self\"><br/><br/><font face=\"arial\"><font size=\"5\">See %s's page</font></a></i></center>", friend, friend);
-
-    while(!feof(html_ptr)){
-        printf("%s\n",html_line);
-        fgets(html_line, 2047, html_ptr);
-    }
-    
-    fclose(html_ptr);
     return;
-    
-
 }
+
+
+//---------------------------------------------------------------------------
 
 // ------------------------------------------------------------------------
 
