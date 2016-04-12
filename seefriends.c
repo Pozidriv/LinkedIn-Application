@@ -7,71 +7,52 @@
 void getFriends(char *user);
 void friendProfile(char *friend);
 void listFriends(int i, char *user);
+void errorMessage(int error);
 
 
 // ------------------------------------------------------------------------
 
-int main(int argc, char *argv[]){
-
+int main(){
 printf("Content-Type:text/html\n\n"); 
-    if(argc==1){
-        int length = atoi(getenv("CONTENT_LENGTH"));
-        char user[60];
-        char friend[60];
-        char c;
-        int i = 0;
-        int f = 0;
- 
-        int numarg = 1;
-        
-        while ((c = getchar()) != EOF && i<length) {
-            if (i < 200) {
-                if (c!='+' && numarg==1) {
-                    user[i]=c;
-                }
-                else if (c=='+' && numarg>1){
-                    friend[i]='\0';
-                    numarg++;
-                }
-                
-                else if (c!='+' && numarg==2) {
-                    user[f]=c;
-                    f++;
-                }
-                else if (c=='+' && numarg==2){
-                    friend[f]='\0';
-                    numarg++;
-                    f++;
-                }
-                else if(numarg>2){
-                    return EXIT_FAILURE;
-                }
-                
-                i++;
-            }
-        }
-        
-        friend[f] ='\0';
-        
-        if(numarg==1){
-            getFriends(user);
-        }
-        
-        else if(numarg==2){
-            friendProfile(friend);
-        }
-        
-    }
-    
-// For testing purpose (on my computer)
-    else if(argc==2){
-        getFriends(argv[1]);
-    }
 
+// Getting input with post
+
+        int n = atoi(getenv("CONTENT_LENGTH"))+1;
+	char string[120];
+        
+	fgets(string, n, stdin);
+
+// Verifying if the input is a username or the friend chosen by the user
+
+	char *input = strtok(string,"=");
+
+	if(strcmp(input,"user")==0){
+		input = strtok(NULL,"=");
+
+printf(" User : %s; ", input);
+
+		getFriends(input);
+		return EXIT_SUCCESS;
+	}
 	
-    else if(argc==3){
-	friendProfile(argv[2]);
-    }
+	else if(strcmp(input,"friend")==0){
+
+                input = strtok(NULL,"=");
+
+printf(" Friend : %s; ", input);
+
+		friendProfile(input);
+                return EXIT_SUCCESS;
+
+	} 
+
+// If neither, just quit bro, just quit.
+
+	else {
+		printf(" Invalid input for seefriends.c : user name of friend name \n");
+		return EXIT_FAILURE;
+
+	}
 
     return EXIT_SUCCESS;
 
@@ -84,49 +65,43 @@ void getFriends(char *user){
 
 	FILE *file_ptr;
 	char line[2048];
+	char friends[2048];
 	char *name;
 	int i = 0;
-	file_ptr = fopen("friends.txt", "rt");
+
+// The program is not able to open the file, even if i put the full http
+
+	file_ptr = fopen("../LinkedIn-Application/friends.txt", "rt");
 		
 		// just in case...
 
 		if (file_ptr==NULL){
-
-        		printf("<html>");
-
-			printf("<body style=\"background-color:lightblue;\">");
-
-			printf("<font face=\"arial\"><font size=\"18\"><center><b><u></br>See a friend page </u></b></center></font></br></br>");
-
-			printf("<i><h3><font color =\"red\">Error. The filename does not exist. Please tell to your litterate grandmas that a mistake occured </h3></i><br/></font>");
-
-			printf("</html>");
-
-
+			errorMessage(1);
 			return;
 		}
 
 
 	while(!feof(file_ptr)){
 		fgets(line, 2047, file_ptr);
+		strcpy(friends, line);
+		
 		if(line[0]=='\n'){
 			i++;
 			continue;
 		}
 	
 		else {
-
 			name = strtok(line, ",");
 	
 		
-			if(strcmp(name, user)!=0){
+			if(strcmp(name,user)!=0){
 				i++;
 				continue;
 			}
 
-			else {	
+			else { printf("ok"); return;
 				fclose(file_ptr);
-				listFriends(i, user);
+				listFriends(friends);
 				return;
 			}
 		}
@@ -138,19 +113,20 @@ void getFriends(char *user){
 
 // ------------------------------------------------------------------------
 
-void listFriends(int i, char *user){
-
-	FILE *friend_ptr;
-	FILE *html_ptr;
-	char friends[2048];
-    char html_line[300];
-    char *friend;
-    int html_index = 1;
-    int numfriends = 0;
+void listFriends(char *friend){
 
 
-   	friend_ptr = fopen("friends.txt", "rt");
-    html_ptr = fopen("seefriends.html", "rt");
+    	html_ptr = fopen("seefriends.html", "rt");
+
+
+	// Not able to open the file
+
+	if( friend_ptr==NULL || html_ptr==NULL){
+
+		printf("Inside listFriends \n");
+		errorMessage(1);
+	}
+
 
 
 	fgets(friends, 2047, friend_ptr);
@@ -167,8 +143,6 @@ void listFriends(int i, char *user){
 	friend = strtok(NULL,",");
 
 
-	//printf("<font color=\"lightblue\" Content-Type:text/html\n\n </font>");
-    
 
 	while(html_index<=32){
         
@@ -225,27 +199,18 @@ void listFriends(int i, char *user){
 void friendProfile(char *friend){
     FILE *profile_ptr;
     char line[2048];
-    profile_ptr = fopen("users.txt", "rt");
+    profile_ptr = fopen("http://cgi.cs.mcgill.ca/~djosep13/LinkedIn-Application/users.txt", "rt");
 
     // just in case...
 
     if (profile_ptr==NULL){
-    
-        printf("<html>");
-    
-        printf("<body style=\"background-color:#72B2AA;\">");
-    
-        printf("<font face=\"arial\"><font size=\"18\"><center><b><u></br>See a friend page </u></b></center></font></br></br>");
-    
-        printf("<i><h3><font color =\"red\">Error. The filename does not exist. Please tell to your litterate grandmas that a mistake occured </h3></i><br/></font>");
-    
-        printf("</html>");
-    
-    
+   	printf(" Inside friendProfile \n "); 
+    	errorMessage(1);
         return;
     }
 
-    fgets(line, 2047, profile_ptr);
+
+   fgets(line, 2047, profile_ptr);
    while(!feof(profile_ptr)){
 	
 // Creating a string without the training linefeed
@@ -326,6 +291,33 @@ void friendProfile(char *friend){
 
 //---------------------------------------------------------------------------
 
+void errorMessage(int error){
+
+	// The file that seefriends.c tried to open does not exist
+
+	if(error == 1){
+	        printf("<html>");
+
+                printf("<body style=\"background-color:#72B2AA;\">");
+
+                printf("<font face=\"arial\"><font size=\"18\"><center><b><u></br>See a friend page </u></b></center></font></br></br>");
+
+                printf("<i><h3><font color =\"darkred\">Error. The filename does not exist. Please tell to your litterate grandmas that a mistake occured </h3></i><br/></font>");
+                printf("</body>");
+                printf("</html>");
+		
+		return;
+	}
+
+
+	// The user does not have any friend
+	else if(error == 2){
+
+		return;
+	}
+
+	return;
+}
 // ------------------------------------------------------------------------
 
 
