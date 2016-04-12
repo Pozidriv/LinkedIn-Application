@@ -6,7 +6,7 @@
 
 void getFriends(char *user);
 void friendProfile(char *friend);
-void listFriends(int i, char *user);
+void listFriends(char *friend);
 void errorMessage(int error);
 
 
@@ -21,27 +21,48 @@ printf("Content-Type:text/html\n\n");
 	char string[120];
         
 	fgets(string, n, stdin);
-
 // Verifying if the input is a username or the friend chosen by the user
 
 	char *input = strtok(string,"=");
 
 	if(strcmp(input,"user")==0){
 		input = strtok(NULL,"=");
-
-printf(" User : %s; ", input);
-
-		getFriends(input);
+		int length = strlen(input)+1;
+		char user[length];
+		int i = 0;
+	        while (i<length-1) {
+                	if (*(input+i)!='+') {
+                    		user[i]=*(input+i);;
+                	}
+                	else if (*(input+i)=='+'){
+                    		user[i]=' ';
+                	}
+			i++;
+		}
+		user[length-1] = '\0';
+		getFriends(user);
 		return EXIT_SUCCESS;
 	}
 	
 	else if(strcmp(input,"friend")==0){
 
+
                 input = strtok(NULL,"=");
+                int length = strlen(input)+1;
+                char friend[length];
+		int i = 0;
+                while (i<length-1) {
 
-printf(" Friend : %s; ", input);
-
-		friendProfile(input);
+                        if (*(input+i)!='+') {
+                                friend[i]=*(input+i);;
+                        }
+                        else if (*(input+i)=='+'){
+                                friend[i]=' ';
+                        }
+                        i++;
+                }
+		friend[length-1]='\0';
+		friendProfile(friend);
                 return EXIT_SUCCESS;
 
 	} 
@@ -99,7 +120,7 @@ void getFriends(char *user){
 				continue;
 			}
 
-			else { printf("ok"); return;
+			else {
 				fclose(file_ptr);
 				listFriends(friends);
 				return;
@@ -113,15 +134,16 @@ void getFriends(char *user){
 
 // ------------------------------------------------------------------------
 
-void listFriends(char *friend){
+void listFriends(char *friends){
 
-
-    	html_ptr = fopen("seefriends.html", "rt");
-
+	
+    	FILE *html_ptr = fopen("../LinkedIn-Application/seefriends.html", "rt");
+	char html_line[2048];
+	char *putRadio = "RADIOBUTTONS\n";
 
 	// Not able to open the file
 
-	if( friend_ptr==NULL || html_ptr==NULL){
+	if(html_ptr==NULL){
 
 		printf("Inside listFriends \n");
 		errorMessage(1);
@@ -129,65 +151,45 @@ void listFriends(char *friend){
 
 
 
-	fgets(friends, 2047, friend_ptr);
 
-
-        while(i){
-
-                fgets(friends, 2047, friend_ptr);
-                i--;
-        }
-
-
+	// First token is the username
 	strtok(friends,",");
-	friend = strtok(NULL,",");
+
+	// Then we have the friends
+	friends = strtok(NULL,",");
 
 
+	// Printing the html file
 
-	while(html_index<=32){
-        
-        	fgets(html_line, 2047, html_ptr);
-        	printf("%s\n",html_line);
-        	html_index++;
-   	}
-    
+	while(!feof(html_ptr)){
 
-	//printf("<form name=\"input\" action=\"http://cs.mcgill.ca/~djosep13/cgi-bin/seefriends.cgi\" method =\"post\">");
-
-
-	while(friend != NULL){
-
-		printf("<input type=\"radio\" name=\"friend\" value=\"%s %s\">&nbsp;&nbsp;%s<br/>",user,friend,friend);
-	
-		friend = strtok(NULL,",");
-		numfriends++;
-
-	}
-
-// needs samuel user name
-
-	if(numfriends==0){
-		printf("</form>");
-
-		printf("You do not have friends for the moment. You can go back to your dashboard to access makefriends page<br/><br/>>");
-		printf("<a href=\"http://www.cs.mcgill.ca/~samuel/cgi-bin/dashboard.cgi\" target=\"_self\"><br/><br/><font face=\"arial\"><font size=\"5\"> Dashboard</font></a>");
-		
-		printf("</body>"); 
-		printf("</html>");
-
-		fclose(friend_ptr);
-		fclose(html_ptr);
-
-		return;
-	}
-
-    while(!feof(html_ptr)){
-        
         fgets(html_line, 2047, html_ptr);
-        printf("%s\n",html_line);
-    }
+	        
+		if(strcmp(html_line,putRadio)==0){
 
-	fclose(friend_ptr);
+        		// If the user does not have friend
+        		if(friends==NULL){
+                		errorMessage(2);
+                		fclose(html_ptr);
+                		return;
+        		}	
+
+
+        		while(friends != NULL){
+
+                		printf("<input type=\"radio\" name=\"friend\" value=\"%s\">&nbsp;&nbsp;%s<br/>",friends,friends);
+
+                		friends = strtok(NULL,",");
+        		}
+		}
+
+		else {
+			printf("%s\n",html_line);
+		}
+    	}
+
+
+
     fclose(html_ptr);
 	
 	return;
@@ -199,7 +201,7 @@ void listFriends(char *friend){
 void friendProfile(char *friend){
     FILE *profile_ptr;
     char line[2048];
-    profile_ptr = fopen("http://cgi.cs.mcgill.ca/~djosep13/LinkedIn-Application/users.txt", "rt");
+    profile_ptr = fopen("../LinkedIn-Application/users.txt", "rt");
 
     // just in case...
 
@@ -243,10 +245,10 @@ void friendProfile(char *friend){
 // If they match, prints her/his profile
 
 
-	else {	
+	else {
  		    FILE *html_ptr;
 		    char html_line[2048];
-    		    html_ptr = fopen("profile.html", "rt");
+    		    html_ptr = fopen("../LinkedIn-Application/profile.html", "rt");
     		    char *putUSERNAME ="USERNAME\n";
 		    char *putFULLNAME ="FULLNAME\n";
 		    char *putJOB = "JOB\n";
@@ -313,7 +315,15 @@ void errorMessage(int error){
 	// The user does not have any friend
 	else if(error == 2){
 
-		return;
+                printf("</form>");
+
+                printf("You do not have friends for the moment. You can go back to your dashboard to access makefriends page<br/><br/>>");
+                printf("<a href=\"http://www.cgi.cs.mcgill.ca/~djosep13/LinkedIn-Application/dash.html\" target=\"_self\"><br/><br/><font face=\"arial\"><font size=\"5\"> Dashboard</font></a>");
+
+                printf("</body>");
+                printf("</html>");
+
+                return;
 	}
 
 	return;
