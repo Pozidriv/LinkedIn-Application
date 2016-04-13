@@ -3,6 +3,7 @@
 import sys
 import os
 import cgitb
+import cgi
 
 cgitb.enable()
 
@@ -16,13 +17,16 @@ cgitb.enable()
 
 
 
-print "Content-Type: text/html"
+print "Content-Type:text/html\n\n"
 print
 
+print "Hey!"
 
 
 
 def Catalog():
+    
+    currentuser  = "aniouche"
     
     print " debug : got in catalog fn"
 
@@ -64,21 +68,19 @@ def Catalog():
         else:
 
 
+            line = file.readline()
+            line = profile.rstrip()
 
+            print "debug : before while"
 
-        line = file.readline()
-        line = profile.rstrip()
-
-        print "debug : before while"
-
-        while line != "" :
+            while line != "" :
     
-            print " debug : in while"
+                print " debug : in while"
             
                 # do not want to print his name in the catalog
-            if line == currentuser :
+                if line == currentuser :
                 
-                print " debug : in if line == currentuser"
+                    print " debug : in if line == currentuser"
                 
                 # go to the next username
                     for i in range(0,4):
@@ -87,27 +89,27 @@ def Catalog():
                 
                         line = file.rstrip()
 
-            else :
+                else :
 
-                print " debug : in else not currentuser"
+                    print " debug : in else not currentuser"
 
-                username = line
+                    username = line
                 
                     # go to the fullname line, two steps away
-                line = file.readline()
-                line = file.readline()
+                    line = file.readline()
+                    line = file.readline()
                 
-                fullname = line.rstrip()
+                    fullname = line.rstrip()
 
-                print username
-                print " - "
-                print fullname
-                print " <input type=\"checkbox\" name=friends value=\"", username,
-                print "\">"
+                    print username
+                    print " - "
+                    print fullname
+                    print " <input type=\"checkbox\" name=friends value=\"", username,
+                    print "\">"
 
             # go to the next username, which is two steps away (1. job 2. username)
-                line = file.readline()
-                line = file.readline()
+                    line = file.readline()
+                    line = file.readline()
 
 
 # end of while
@@ -126,7 +128,7 @@ def Catalog():
 
 
 
-
+Catalog()
 
 
 # youri parts in newfriends.py
