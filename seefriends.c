@@ -228,6 +228,7 @@ void listFriends(char *friends){
             
             
             while(friends != NULL){
+
                 
                 printf("<input type=\"radio\" name=\"friend\" value=\"%s\">&nbsp;&nbsp;%s<br/>",friends,friends);
                 

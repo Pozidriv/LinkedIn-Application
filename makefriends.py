@@ -20,15 +20,13 @@ cgitb.enable()
 print "Content-Type:text/html\n\n"
 print
 
-print "Hey!"
-
+#currentuser = cgi.fieldStorage()
 
 
 def Catalog():
     
     currentuser  = "aniouche"
     
-    print " debug : got in catalog fn"
 
 # open the users.txt file
 
@@ -42,7 +40,7 @@ def Catalog():
 # open the makefriends.html file
 
     try:
-        htmlfile = open("makeafriend.html", "r")
+        htmlfile = open("makefriends.html", "r")
     
     except IOError:
         print "Please tell it to your litterate grandmas. Code : IOError - makefriends.py - open makefriends.html"
@@ -69,29 +67,27 @@ def Catalog():
 
 
             line = file.readline()
-            line = profile.rstrip()
+            line = line.rstrip()
 
-            print "debug : before while"
 
-            while line != "" :
+            while line != "":
     
-                print " debug : in while"
             
                 # do not want to print his name in the catalog
                 if line == currentuser :
-                
-                    print " debug : in if line == currentuser"
+                    #print line
                 
                 # go to the next username
                     for i in range(0,4):
                 
                         line = file.readline()
-                
-                        line = file.rstrip()
+ 			               
+                        line = line.rstrip()
 
-                else :
 
-                    print " debug : in else not currentuser"
+
+                else:
+
 
                     username = line
                 
@@ -101,11 +97,13 @@ def Catalog():
                 
                     fullname = line.rstrip()
 
+                    print " <input type=\"checkbox\" name=friends value=\"", username,
+                    print "\">"
+
                     print username
                     print " - "
                     print fullname
-                    print " <input type=\"checkbox\" name=friends value=\"", username,
-                    print "\">"
+		    print "<br/>"
 
             # go to the next username, which is two steps away (1. job 2. username)
                     line = file.readline()
@@ -113,12 +111,10 @@ def Catalog():
 
 
 # end of while
-        print " debug : end of while txt"
             
-    print "debug : end of while html"
 
     file.close()
-    html.close()
+    htmlfile.close()
 
     print "end of catalog"
 

@@ -1,16 +1,12 @@
-<<<<<<< HEAD
 USERNAME
 PASSWORD
 FULL NAME
 JOB DESCRIPTION
-dahana
-=======
 aniouche
 bonjourmonde
 Ania S.
 Professional couscous eater.Professional couscous eater! Since 1990's How about some more words just to see how is this table? yes man. So I have a nose and eyes. Pretty usefule to eat couscous
 Radix Sorts CEO
->>>>>>> 9cb2641178fd3593b28b14c4305fec688611bd2a
 helloworld
 Dahana Joseph
 Student at McGill. The one behind what you see now. What you see right now is the reason why i still did not start the COMP 250 hw : i am struggling more than you.
@@ -18,13 +14,10 @@ Crepeaus apprentice
 byeworld
 Ilyas A.
 Software Engineering student, futur propriétaire d’une Audi.  I got you bro. ;)
-<<<<<<< HEAD
 aniouche
 bonjourmonde
 Ania S.
 Professional couscous eater.Professional couscous eater! Since 1990's How about some more words just to see how is this table? yes man. So I have a nose and eyes. Pretty usefule to eat couscous.
-=======
->>>>>>> 9cb2641178fd3593b28b14c4305fec688611bd2a
 Simbas
 aurevoirmonde
 Bastian K.
@@ -53,4 +46,3 @@ MergeSort Lord
 somethingelse
 Tharsan
 Also struggling for comp 250 (dahana supports you)
-
