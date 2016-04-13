@@ -10,6 +10,8 @@ The css stylesheet is here: http://cs.mcgill.ca/~ytamit/global.css
 NOTES: do not forget to compile on the freebsd or cgi server; it won't work otherwise.
 Put all your binary .cgi executables in the cgi-bin directory
 
+Useful link for Python: https://docs.python.org/2/library/cgi.html
+
 Workload separation: 
 
 Samuel: dashboard.html, dashboard.py, status.py, register.c

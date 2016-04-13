@@ -77,6 +77,9 @@ body {
  /*      For the profile of a user : used by seefriends.c      */
 /*------------------------------------------------------------*/
 
+
+/* This is for the blue rectangle thats hold the username */
+
 #usertitle {
     border-bottom: 4px solid black;
     border-top: 4px solid black;
@@ -87,27 +90,34 @@ body {
 }
 
 
+
+/* The profile picture style */
+
 #pic{
     
-
     margin-top : 40px;
     float : right;
     margin-right:10%;
     width:17vw;
     height:15vw;
-    
     border: 5px solid black;
  
-    
 }
 
+
+
+/* The table holding the full name and job description */
+
 #profile {
-    width:55vw;
+
+    width:55%;
     text-align:center;
     margin-top: 40px;
-    margin-left:14.3%;
-    
+    margin-left:10%;
 }
+
+
+/* Attribute of the full name style */
 
 #name{
     
@@ -126,6 +136,7 @@ body {
 }
 
 
+/* Attribute of the job style */
 
 #job{
     
@@ -141,15 +152,18 @@ body {
 
 }
 
+
+/* Attribute of the table of status */
+
 #statustable{
 
     width:80%;
     margin-left:auto;
     margin-right:auto;
     margin-top : 40px;
-    
-
+   
 }
+
 
 #statushead{
     background-color: #6685B6;
@@ -160,8 +174,9 @@ body {
     border-left: 2px solid black;
     border-right: 2px solid black;
 
-
 }
+
+/* Even and odd : to alternate the color */
 
 #status:nth-child(even){
     
@@ -177,6 +192,7 @@ body {
     font-family: "Times New Roman", Times, serif;
 }
 
+/*------------------------------------------------------------*/
 
 #instr {
     text-align: center;
