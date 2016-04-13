@@ -5,10 +5,11 @@
 		<meta charset="utf-8">
 	</head>
 	<body>
-		<form name="friends2see" action="newfriends.py" method="get"><br>
-		Friend 1: <input type="text" name="friend1"><br>
-		Friend 2: <input type="text" name="friend2"><br>
-		Friend 3: <input type="text" name="friend3"><br>
+		<form name="friends2see" action="newfriends.py" method="post"><br>
+		<input type="hidden" name="username" value="Karatsuba Master">
+		Friend 1: <input type="checkbox" name="hello"><br>
+		Friend 2: <input type="checkbox" name="friend2"><br>
+		Friend 3: <input type="checkbox" name="friend3"><br>
 		<input type="submit" value="getFriends">
 		</form>
 	</body>
