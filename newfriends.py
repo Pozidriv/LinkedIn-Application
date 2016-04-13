@@ -11,6 +11,10 @@ print "Content-Type:text/html\n\n"
 
 arguments = cgi.FieldStorage()
 
+
+#--------Functions-------------------------
+
+
 # This function will receive as input arguments (as returned by cgi.FieldStorage()
 # It will return the list of friends to add to the list
 # Tested, works
@@ -20,6 +24,8 @@ def getVariables(arguments) :
 		listVariables.append(name)
 	return listVariables
 
+#------------------------------------------
+
 # This function will receive as input a list of names, and a string representing a username. 
 # It will add each friend of the list to the friends of the given user.
 # Tested, works
@@ -28,7 +34,7 @@ def addFriends(listFriends, username) :
 	data = f.read(100000)
 	username = '$' + username
 
-	print "<br>", data, "<br>"
+	#print "<br>", data, "<br>"
 
 	# Finding the starting index of the line starting with the username
 	index = data.find(username)
@@ -44,7 +50,7 @@ def addFriends(listFriends, username) :
 	if index == -1 : # eof has been reached
 		f.close()
 		f = open("./friends.txt", "a")
-		f.append(",".join(listFriends))
+		f.append("," + ",".join(listFriends))
 		f.close()
 	else :
 		before = data[:index]
@@ -54,26 +60,39 @@ def addFriends(listFriends, username) :
 		f = open("./friends.txt", "w")
 		
 		f.write(before)
-		f.write(",".join(listFriends))
+		f.write("," + ",".join(listFriends))
 		f.write(after)
 		f.close()
 	
 	return 0
 
-print "<html>"
+#----------------------------------------------
 
-# url = urllib2.Request.get_full_url()
-
-# data = fetchGetData(url)
-# print url
-
+# Retrieving the variables from the form
 listVariables = getVariables(arguments)
+
+# Removing the username from listVariables (since we won't be adding it)
 username = arguments.getvalue("username")
 listVariables.remove("username")
 
-addFriends(listVariables, username)
+# Adding friends
+if listVariables : 
+	addFriends(listVariables, username)
 
-# print arguments
-# print listVariables
+	data = open("./success_addfriends.html").read()
 
-print "</html>"
+	index = data.find("$")
+	before = data[:index]
+	after = data[index+1:]
+	output = before + username + after
+	
+	print output
+else :
+	data = open("./error_noUserSel.html").read()
+
+	index = data.find("$")
+	before = data[:index]
+	after = data[index+1:]
+	output = before + username + after
+	
+	print output
