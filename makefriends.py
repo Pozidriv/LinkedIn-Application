@@ -2,6 +2,9 @@
 
 import sys
 import os
+import cgi
+
+cgitb.enable()
 
 # 1. Read users.txt and takes each users (except himself) and displays them with a check button
 #   a) open the file
