@@ -138,8 +138,7 @@ void getFriends(char *user){
         
         // 1. Take the first entry and verify if it is the username that we are looking for
         else {
-            name = strtok(line, "$,");
-            
+            name = strtok(line, "$,\n");
             
             if(strcmp(name,user)!=0){
                 i++;
@@ -190,7 +189,13 @@ void listFriends(char *user, char *friends){
     
     // Then we have the friends
     friends = strtok(NULL,"$,\n");
-    
+	    
+    // If the user does not have friend
+    if(friends==NULL){
+         errorMessage(NOFRIENDS, user);
+         return;
+     }
+
     
     // Printing the html file
     
@@ -202,10 +207,10 @@ void listFriends(char *user, char *friends){
             
             
             // If the user does not have friend
-            if(friends==NULL){
-                errorMessage(NOFRIENDS, user);
-                return;
-            }
+ //           if(friends==NULL){
+   //             errorMessage(NOFRIENDS, user);
+     //           return;
+       //     }
             
             
             while(friends != NULL){
@@ -385,16 +390,30 @@ void errorMessage(int error, char *user){
     // The user does not have any friend
     else if(error == NOFRIENDS){
         
-        printf("</form>");
-        
-        printf("You do not have friends for the moment. You can go back to your dashboard to access makefriends page<br/><br/>");
-        printf("<form name=\"welcome page\" action=\"http://cs.mcgill.ca/~ytamit/index.html\">");
-	printf("<input type=\"submit\" value=\"Back to Welcome Page\"> </form>");
-	printf("<form name=\"dashboard\" action=\"http://cs.mcgill.ca/~sgrego15/LinkedIn-Application/dashboard.py\" method=\"post\">");
-	printf("<input type=\"hidden\" name=\"username\" value=\"%s\">", user);
-	printf(" <input type=\"submit\" value=\"Back to my Dashboard\"></form>");
-        printf("</body>");
-        printf("</html>");
+        printf("<html> \n  <head> \n");
+	printf("<title> See friends </title> \n");
+	printf("<link href=\"http://cgi.cs.mcgill.ca/~djosep13/LinkedIn-Application/global.css\" rel=\"stylesheet\" type=\"text/css\"> \n");     
+	printf("</head> \n <body> \n");
+
+
+
+	printf("<table id=\"titletable\"> \n");
+	printf("<tr><th id=\"header\">SEE YOUR FRIENDS PAGE</th></tr>\n");
+	printf("<tr><td id=\"subtitle\">Want to learn more about your friends?</td></tr>\n");
+	printf("</table><br/><br/><br/>\n");
+	printf("<h1 id=\"instr\">:(</h1>\n");
+	printf("<hr width=\"60%\", color=\"black\"><br/>\n");
+
+
+
+        printf("You do not have friends for the moment. You can go back to your dashboard to access makefriends page<br/><br/>\n");
+        printf("<form name=\"welcome page\" action=\"http://cs.mcgill.ca/~ytamit/index.html\">\n");
+	printf("<input type=\"submit\" value=\"Back to Welcome Page\"> </form>\n");
+	printf("<form name=\"dashboard\" action=\"http://cs.mcgill.ca/~sgrego15/LinkedIn-Application/dashboard.py\" method=\"post\">\n");
+	printf("<input type=\"hidden\" name=\"username\" value=\"%s\">\n", user);
+	printf(" <input type=\"submit\" value=\"Back to my Dashboard\"></form>\n");
+        printf("</body>\n");
+        printf("</html>\n");
         
         return;
     }
