@@ -10,7 +10,7 @@
 void getFriends(char *user);
 void friendProfile(char *user, char *friend);
 void listFriends(char *user, char *friend);
-void errorMessage(int error);
+void errorMessage(int error, char *user);
 
 // ------------------------------------------------------------------------------------------ //
 
@@ -118,7 +118,7 @@ void getFriends(char *user){
     // just in case... Throw an error page
     
     if (file_ptr==NULL){
-        errorMessage(1);
+        errorMessage(FILE_ERROR, user);
         return;
     }
     
@@ -180,7 +180,7 @@ void listFriends(char *user, char *friends){
     
     if(html_ptr==NULL){
         
-        errorMessage(FILE_ERROR);
+        errorMessage(FILE_ERROR, user);
         fclose(html_ptr);
     }
     
@@ -203,7 +203,7 @@ void listFriends(char *user, char *friends){
             
             // If the user does not have friend
             if(friends==NULL){
-                errorMessage(NOFRIENDS);
+                errorMessage(NOFRIENDS, user);
                 return;
             }
             
@@ -251,7 +251,7 @@ void friendProfile(char *user, char *friend){
     
     if (profile_ptr==NULL){
         
-        errorMessage(FILE_ERROR);
+        errorMessage(FILE_ERROR, user);
         return;
     }
     
@@ -302,7 +302,7 @@ void friendProfile(char *user, char *friend){
             // if the file cannot be open
             
             if(html_ptr==NULL){
-                errorMessage(FILE_ERROR);
+                errorMessage(FILE_ERROR, user);
                 return;
             }
             
@@ -362,7 +362,7 @@ void friendProfile(char *user, char *friend){
  -------------------------------------------------------------------------------*/
 
 
-void errorMessage(int error){
+void errorMessage(int error, char *user){
     
     // The file that seefriends.c tried to open does not exist
     
@@ -387,9 +387,12 @@ void errorMessage(int error){
         
         printf("</form>");
         
-        printf("You do not have friends for the moment. You can go back to your dashboard to access makefriends page<br/><br/>>");
-        printf("<a href=\"http://www.cgi.cs.mcgill.ca/~djosep13/LinkedIn-Application/dash.html\" target=\"_self\"><br/><br/><font face=\"arial\"><font size=\"5\"> Dashboard</font></a>");
-        
+        printf("You do not have friends for the moment. You can go back to your dashboard to access makefriends page<br/><br/>");
+        printf("<form name=\"welcome page\" action=\"http://cs.mcgill.ca/~ytamit/index.html\">");
+	printf("<input type=\"submit\" value=\"Back to Welcome Page\"> </form>");
+	printf("<form name=\"dashboard\" action=\"http://cs.mcgill.ca/~sgrego15/LinkedIn-Application/dashboard.py\" method=\"post\">");
+	printf("<input type=\"hidden\" name=\"username\" value=\"%s\">", user);
+	printf(" <input type=\"submit\" value=\"Back to my Dashboard\"></form>");
         printf("</body>");
         printf("</html>");
         
