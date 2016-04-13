@@ -31,7 +31,7 @@ def Catalog():
 # open the users.txt file
 
     try:
-        file = open("users.txt", "r")
+        data = open("users.txt", "r")
     
     except IOError:
         print "Please tell it to your litterate grandmas. Code : IOError - makefriends.py - open users.txt"
@@ -53,8 +53,8 @@ def Catalog():
 
     for line in html:
 
-        breakpoint = line.rstrip()
-        if breakpoint!="HERE":
+        breakpoint = line.rstrip('\n')
+        if breakpoint!="CHECKBOXES":
             print breakpoint
 
 #------------------------------------------------------------------------------------------------------
@@ -66,23 +66,23 @@ def Catalog():
         else:
 
 
-            line = file.readline()
-            line = line.rstrip()
+            line = data.readline()
+            line = line.rstrip('\n')
 
 
             while line != "":
     
-            
+                print line
+		print "..."
                 # do not want to print his name in the catalog
                 if line == currentuser :
-                    #print line
                 
                 # go to the next username
                     for i in range(0,4):
                 
-                        line = file.readline()
+                        line = data.readline()
  			               
-                        line = line.rstrip()
+                        line = line.rstrip('\n')
 
 
 
@@ -92,10 +92,10 @@ def Catalog():
                     username = line
                 
                     # go to the fullname line, two steps away
-                    line = file.readline()
-                    line = file.readline()
+                    line = data.readline()
+                    line = data.readline()
                 
-                    fullname = line.rstrip()
+                    fullname = line.rstrip('\n')
 
                     print " <input type=\"checkbox\" name=friends value=\"", username,
                     print "\">"
@@ -106,14 +106,14 @@ def Catalog():
 		    print "<br/>"
 
             # go to the next username, which is two steps away (1. job 2. username)
-                    line = file.readline()
-                    line = file.readline()
+                    line = data.readline()
+                    line = data.readline()
 
 
 # end of while
             
 
-    file.close()
+    data.close()
     htmlfile.close()
 
     print "end of catalog"
