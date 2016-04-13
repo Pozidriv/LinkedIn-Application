@@ -9,8 +9,9 @@
 		<h1>Success!</h1>
 		<p>The friends you have selected were added successfully!
 		</p>
-		<p>You can now <a href="./index.html">Return to the Home Page</a>
-		or to your <a href="./cgi-bin/dashboard.py">Dashboard</a>
-		</p>
+		<form name="blank" action="dashboard.py" method="post">
+		<input type="hidden" name="username" value="$">
+		<input type="submit" value="Back to Dashboard">
+		</form>
 	</body>
 </html>
