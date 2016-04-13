@@ -31,7 +31,7 @@ def getVariables(arguments) :
 # Tested, works
 def addFriends(listFriends, username) :
 	f = open("./friends.txt", 'r+')
-	data = f.read(100000)
+	data = f.read()
 	username = '$' + username
 
 	#print "<br>", data, "<br>"
