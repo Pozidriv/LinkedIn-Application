@@ -1,7 +1,6 @@
 $Crepeaus apprentice,Karatsuba Master,MergeSort Lord,gagarine,Bob,Simbas,Casper,maryy,Radix Sorts CEO,aniouche
 
-$Karatsuba Master,MergeSort Lord,gagarine,Bob,Simbas,Casper,
-maryy,Radix Sorts CEO,Crepeaus apprentice,aniouche
+$Karatsuba Master,MergeSort Lord,gagarine,Bob,Simbas,Casper,maryy,Radix Sorts CEO,Crepeaus apprentice,aniouche
 
 $MergeSort Lord,gagarine,Bob,Simbas,Casper,maryy,Radix Sorts CEO,Crepeaus apprentice,Karatsuba Master,aniouche
 
