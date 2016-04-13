@@ -2,7 +2,7 @@
 
 import sys
 import os
-import cgi
+import cgitb
 
 cgitb.enable()
 
@@ -16,7 +16,9 @@ cgitb.enable()
 
 
 
-print "Content-Type:text/html\n\n"
+print "Content-Type: text/html"
+print
+
 
 
 
@@ -100,7 +102,7 @@ def Catalog():
                 print username
                 print " - "
                 print fullname
-                print " <input type=\"checkbox\" name=", username,
+                print " <input type=\"checkbox\" name=friends value=\"", username,
                 print "\">"
 
             # go to the next username, which is two steps away (1. job 2. username)
