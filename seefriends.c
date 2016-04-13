@@ -8,8 +8,8 @@
 // ------------------------------------------------------------------------------------------ //
 
 void getFriends(char *user);
-void friendProfile(char *friend);
-void listFriends(char *friend);
+void friendProfile(char *user, char *friend);
+void listFriends(char *user, char *friend);
 void errorMessage(int error);
 
 // ------------------------------------------------------------------------------------------ //
@@ -42,28 +42,15 @@ int main(){
     // Verifying if the input is a [user name] or the [friend] chosen by the user
     // According to the input name (friend= or user=)
     
-    char *input = strtok(string,"=");
-    
+    char *input = strtok(string,"=+");
+      
+ 
     if(strcmp(input,"user")==0){
-        
-        input = strtok(NULL,"=");
-        int length = strlen(input)+1;
-        char user[length];
-        int i = 0;
-        
-    // Making an array with the name of the user
-        
-        while (i<length-1) {
-            if (*(input+i)!='+') {
-                user[i]=*(input+i);;
-            }
-            else if (*(input+i)=='+'){
-                user[i]=' ';
-            }
-            i++;
-        }
-        user[length-1] = '\0';
-        
+   
+	input = strtok(NULL,"=+");
+	int a = strlen(input);
+	char *user = malloc(a);
+	strcpy(user, input);
         
     // Calling the method that will get the friends of the user
         
@@ -76,24 +63,18 @@ int main(){
     
     else if(strcmp(input,"friend")==0){
         
-        
-        input = strtok(NULL,"=");
-        int length = strlen(input)+1;
-        char friend[length];
-        int i = 0;
-        
-        while (i<length-1) {
-            
-            if (*(input+i)!='+') {
-                friend[i]=*(input+i);;
-            }
-            else if (*(input+i)=='+'){
-                friend[i]=' ';
-            }
-            i++;
-        }
-        friend[length-1]='\0';
-        friendProfile(friend);
+        input = strtok(NULL,"=+");
+        int a = strlen(input);
+        char *user = malloc(a);
+        strcpy(user, input);
+
+	input = strtok(NULL,"=+");
+	int b = strlen(input);
+	char *friend = malloc(b);
+	strcpy(friend, input);
+
+
+        friendProfile(user, friend);
         return EXIT_SUCCESS;
         
     }
@@ -168,7 +149,7 @@ void getFriends(char *user){
         // If so, close the file, and call the listFriends with the full line of the friends.txt
             else {
                 fclose(file_ptr);
-                listFriends(friends);
+                listFriends(user, friends);
                 return;
             }
         }
@@ -187,13 +168,13 @@ void getFriends(char *user){
     with post method.
  -------------------------------------------------------------------------------*/
 
-void listFriends(char *friends){
+void listFriends(char *user, char *friends){
     
     
     FILE *html_ptr = fopen("../LinkedIn-Application/seefriends.html", "rt");
     char html_line[2048];
     char *putRadio = "RADIOBUTTONS\n";
-    
+    char *putLINK = "value=\"USERNAME\"";
     
     // if not able to open the file
     
@@ -205,10 +186,10 @@ void listFriends(char *friends){
     
 
     // First token is the username
-    strtok(friends,"$,");
+    strtok(friends,"$,\n");
     
     // Then we have the friends
-    friends = strtok(NULL,"$,");
+    friends = strtok(NULL,"$,\n");
     
     
     // Printing the html file
@@ -230,12 +211,17 @@ void listFriends(char *friends){
             while(friends != NULL){
 
                 
-                printf("<input type=\"radio\" name=\"friend\" value=\"%s\">&nbsp;&nbsp;%s<br/>",friends,friends);
+                printf("<input type=\"radio\" name=\"friend\" value=\"%s %s \">&nbsp;&nbsp;%s<br/>\n",user,friends,friends);
                 
-                friends = strtok(NULL,"$,");
+                friends = strtok(NULL,"$,\n");
             }
         }
-        
+ 
+	else if(strcmp(html_line, putLINK)==0){
+		printf("value=\"%s\">\n", user);
+	}
+
+       
         else {
             printf("%s\n",html_line);
         }
@@ -256,7 +242,7 @@ void listFriends(char *friends){
     the html page with the profile informations.
  -------------------------------------------------------------------------------*/
 
-void friendProfile(char *friend){
+void friendProfile(char *user, char *friend){
     FILE *profile_ptr;
     char line[2048];
     profile_ptr = fopen("../LinkedIn-Application/users.txt", "rt");
@@ -310,7 +296,8 @@ void friendProfile(char *friend){
             char *putUSERNAME ="USERNAME\n";
             char *putFULLNAME ="FULLNAME\n";
             char *putJOB = "JOB\n";
-            
+	    char *putLINK = "value=\"USERNAME\">\n";
+                
             
             // if the file cannot be open
             
@@ -331,8 +318,12 @@ void friendProfile(char *friend){
             while(!feof(html_ptr)){
                 
                 fgets(html_line, 2047, html_ptr);
-                
-                if(strcmp(putUSERNAME, html_line)==0){
+   	
+		if(strcmp(putLINK, html_line)==0){
+			printf("value=\"%s\">\n",user);
+		}
+             
+                else if(strcmp(putUSERNAME, html_line)==0){
                     printf("%s", friend);
                 }
                 

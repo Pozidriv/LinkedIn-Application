@@ -20,12 +20,11 @@ cgitb.enable()
 print "Content-Type:text/html\n\n"
 print
 
-#currentuser = cgi.fieldStorage()
-
+arguments = cgi.FieldStorage()
+currentuser = arguments.getvalue("user")
 
 def Catalog():
     
-    currentuser  = "aniouche"
     
 
 # open the users.txt file
@@ -54,8 +53,17 @@ def Catalog():
     for line in html:
 
         breakpoint = line.rstrip('\n')
-        if breakpoint!="CHECKBOXES":
-            print breakpoint
+        if breakpoint=="HIDDEN":
+	    breakline = '<input type="hidden" name="username" value="' + currentuser + '">'
+            print breakline
+
+	elif breakpoint=='value="USERNAME">':
+	    breakline = 'value="' + currentuser + '">'
+	    print breakline
+
+	elif breakpoint != "CHECKBOXES":
+	    print breakpoint
+
 
 #------------------------------------------------------------------------------------------------------
 # prints the checkboxes
@@ -67,13 +75,12 @@ def Catalog():
 
 
             line = data.readline()
-            line = line.rstrip('\n')
+ #           line = line.rstrip('\n')
 
 
             while line != "":
-    
-                print line
-		print "..."
+  
+		line = line.rstrip('\n')  
                 # do not want to print his name in the catalog
                 if line == currentuser :
                 
@@ -96,14 +103,13 @@ def Catalog():
                     line = data.readline()
                 
                     fullname = line.rstrip('\n')
+		
+		    output = '<input type="checkbox" name="' + username + '">'
+		    print output
 
-                    print " <input type=\"checkbox\" name=friends value=\"", username,
-                    print "\">"
+		    text = username + '   -   ' + fullname + '<br/>'
+		    print text
 
-                    print username
-                    print " - "
-                    print fullname
-		    print "<br/>"
 
             # go to the next username, which is two steps away (1. job 2. username)
                     line = data.readline()
@@ -116,7 +122,6 @@ def Catalog():
     data.close()
     htmlfile.close()
 
-    print "end of catalog"
 
 
 # end of catalog
@@ -125,18 +130,3 @@ def Catalog():
 
 
 Catalog()
-
-
-# youri parts in newfriends.py
-
-# 2. reads with post method and appends each friends to friends.txt
-#   a) open the file
-#   b) find the user
-#   c) keeps this line
-
-
-#   a) take one friend
-#   b) looks if already a friend
-#   c) appends the name
-#   d) next token
-
