@@ -9,8 +9,16 @@ void friendProfile(char *friend);
 void listFriends(char *friend);
 void errorMessage(int error);
 
+       //---------------------------------------------------------------------------------//
+      //                                    MAIN                                         //
+     // --------------------------------------------------------------------------------//
+    //	 The main method is receiving the post data and verify if it received          //
+   //   the user name, in which case it will call methods that will list the friends  //
+  //   this user, or a friend of the username, in which case it will call            //
+ //   the method that will generates the html profile of the friend.                //
+// --------------------------------------------------------------------------------//
 
-// ------------------------------------------------------------------------
+
 
 int main(){
 printf("Content-Type:text/html\n\n"); 
@@ -89,6 +97,8 @@ void getFriends(char *user){
 	char friends[2048];
 	char *name;
 	int i = 0;
+
+
 
 // The program is not able to open the file, even if i put the full http
 
