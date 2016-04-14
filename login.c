@@ -66,7 +66,7 @@ int main(int argc, char *argv[])
 
 	printf("usr: %s; pwd: %s", inputUsrname, inputPasswd);//debugging
 	if (isValid(inputUsrname, inputPasswd)) {
-		printf("user/pass valid\n");//debugging
+		//printf("user/pass valid\n");//debugging
 		setenv("usr", inputUsrname, 1);
 		system("./dashboard.cgi $usr");
 		//arr[0] = inputUsrname;
@@ -106,16 +106,16 @@ int isValid(char *usr, char *pwd)
 	f = fopen("../users.txt", "rt");
 
 	while (fgets(ptr, n, f) > 0) {
-		printf("line: %s\n", line);//debugging
+		//printf("line: %s\n", line);//debugging
                 if (strncmp(line, usr, strlen(line)-1) == 0
 		  && strlen(line)-1 == strlen(usr)
 		) {
-			printf("usr is the same\n");//debugging
+			//printf("usr is the same\n");//debugging
 			fgets(ptr, n, f);
 			if (strncmp(line, pwd, strlen(line)-1) == 0
 			  && strlen(line) == strlen(pwd)
 			) {
-				printf("pwd is the same");//debugging
+				//printf("pwd is the same");//debugging
                         	fclose(f);
                         	return 1;
 			} else {
