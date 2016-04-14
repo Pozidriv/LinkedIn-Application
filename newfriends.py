@@ -1,5 +1,4 @@
 #!/usr/bin/python
-import urllib2
 import cgitb
 import cgi
 import sys
@@ -9,31 +8,90 @@ cgitb.enable()
 
 print "Content-Type:text/html\n\n"
 
-listFriends = []
-
 arguments = cgi.FieldStorage()
+
+
+#--------Functions-------------------------
+
+
 # This function will receive as input arguments (as returned by cgi.FieldStorage()
 # It will return the list of friends to add to the list
 # Tested, works
-def getFriends(arguments) :
+def getVariables(arguments) :
+	listVariables = []
 	for name in arguments :
-		listFriends.append(name)
-	return listFriends
+		listVariables.append(name)
+	return listVariables
+
+#------------------------------------------
 
 # This function will receive as input a list of names, and a string representing a username. 
 # It will add each friend of the list to the friends of the given user.
+# Tested, works
 def addFriends(listFriends, username) :
-	return
+	f = open("./friends.txt", 'r+')
+	data = f.read()
+	username = '$' + username
 
-print "<html>"
+	#print "<br>", data, "<br>"
 
-# url = urllib2.Request.get_full_url()
+	# Finding the starting index of the line starting with the username
+	index = data.find(username)
 
-# data = fetchGetData(url)
-# print url
+	if index == -1 :
+		print "Error, username could not be found."
+		print "<br>Username was: ", username
+		return -1
+	else :
+		# We are looking for the end of the line starting with the username
+		index = data.find('\n', index)
 
-listFriends = getFriends(arguments)
+	if index == -1 : # eof has been reached
+		f.close()
+		f = open("./friends.txt", "a")
+		f.append("," + ",".join(listFriends))
+		f.close()
+	else :
+		before = data[:index]
+		after = data[index:]
+		
+		f.close()
+		f = open("./friends.txt", "w")
+		
+		f.write(before)
+		f.write("," + ",".join(listFriends))
+		f.write(after)
+		f.close()
+	
+	return 0
 
-print listFriends
+#----------------------------------------------
 
-print "</html>"
+# Retrieving the variables from the form
+listVariables = getVariables(arguments)
+
+# Removing the username from listVariables (since we won't be adding it)
+username = arguments.getvalue("username")
+listVariables.remove("username")
+
+# Adding friends
+if listVariables : 
+	addFriends(listVariables, username)
+
+	data = open("./success_addfriends.html").read()
+
+	index = data.find("$")
+	before = data[:index]
+	after = data[index+1:]
+	output = before + username + after
+	
+	print output
+else :
+	data = open("./error_noUserSel.html").read()
+
+	index = data.find("$")
+	before = data[:index]
+	after = data[index+1:]
+	output = before + username + after
+	
+	print output

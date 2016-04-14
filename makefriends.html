@@ -1,20 +1,21 @@
 <html>
     
     <head>
-        <title> See friends </title>
+        <title> Make friends </title>
         <link href="http://cgi.cs.mcgill.ca/~djosep13/LinkedIn-Application/global.css" rel="stylesheet" type="text/css">
         
     </head>
     
     <body>
         
-                <form name="welcome page" action="http://cs.mcgill.ca/~ytamit/index.html">
-                        <input type="submit" value="Back to Welcome Page">
-                </form>
+	
+		<form name="welcome page" action="http://cs.mcgill.ca/~ytamit/index.html">
+			<input type="submit" value="Back to Welcome Page">
+		</form>
 
 
                  <form name="dashboard" action="http://cs.mcgill.ca/~sgrego15/LinkedIn-Application/dashboard.py" method="post">
-                        <input type="hidden" name="username"
+			<input type="hidden" name="username" 
 value="USERNAME">
                         <input type="submit" value="Back to my Dashboard">
                 </form>
@@ -24,10 +25,10 @@ value="USERNAME">
             <table id="titletable">
                 
                 <tr>
-                    <th id="header">SEE YOUR FRIENDS PAGE</th>
+                    <th id="header">MAKE FRIENDS</th>
                 </tr>
                 <tr>
-                    <td id="subtitle">Want to learn more about your friends?</td>
+                    <td id="subtitle">Want to connect with more grandchildren and grandparents?</td>
                 </tr>
                 
             </table>
@@ -39,15 +40,17 @@ value="USERNAME">
             <hr width="60%", color="black">
             <br/>
             
-            <form name="input" action="http://cgi.cs.mcgill.ca/~djosep13/cgi-bin/seefriends.cgi" method ="post">
+            <form name="input" action="http://cgi.cs.mcgill.ca/~ytamit/newfriends.py" method ="post">
                 
                 <h1 id="friends">
-RADIOBUTTONS
-                <br/><br/></h1><h1 id="subfriend"><input type="submit" value="See the profile"></h1>
+HIDDEN
+CHECKBOXES
+                <br/><br/></h1><h1 id="subfriend"><input type="submit" value="Make friends!"></h1>
                     
             </form>
             
     </body>
         
 </html>
+
 

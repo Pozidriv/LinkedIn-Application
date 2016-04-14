@@ -23,6 +23,8 @@ int main(int argc, char *argv[])
 	//char *arr[1];
 	int n;
 
+	printf("%s%c%c\n","Content-Type:text/html;charset=iso-8859-1",13,10);
+
 	/*************FOR TESTING ONLY*******************/
 	//setenv("CONTENT_LENGTH", "18", 1);
 	/************************************************/
@@ -52,9 +54,9 @@ int main(int argc, char *argv[])
 	//------Retrieving variable values------
 
 	getVariable(data, "user", inputUsrname);
-	//printf("<br>we have user\n");//debugging
+	//printf("<br>we have user %s\n", inputUsrname);//debugging
 	getVariable(data, "passwd", inputPasswd);
-	//printf("<br>we have pass\n");//debugging
+	//printf("<br>we have pass %s\n", inputPasswd);//debugging
 	//at this point, we have the inputed password/username.
 
 	//--------------------------------------
@@ -62,7 +64,7 @@ int main(int argc, char *argv[])
 
 	//------Checking user/password pair-----
 
-	//printf("usr: %s; pwd: %s", inputUsrname, inputPasswd);//debugging
+	printf("usr: %s; pwd: %s", inputUsrname, inputPasswd);//debugging
 	if (isValid(inputUsrname, inputPasswd)) {
 		//printf("user/pass valid\n");//debugging
 		setenv("usr", inputUsrname, 1);
@@ -72,6 +74,8 @@ int main(int argc, char *argv[])
 	} else displayError();
 
 	//--------------------------------------
+
+	//displayError();//debugging
 
 	return 0;
 }
@@ -93,21 +97,21 @@ int main(int argc, char *argv[])
 int isValid(char *usr, char *pwd)
 {
 	char *ptr;
-	char line[100];
-	size_t n = 99;
+	char line[1000];
+	size_t n = 999;
 	FILE *f;
 
 	ptr = line;
 
-	f = fopen("../users.txt", "rt");//lmao, one '.' can prevent a crash!
+	f = fopen("../users.txt", "rt");
 
-	while (getline(&ptr, &n, f) > 0) {
-		//printf("line: %s\n", line);//debugging
+	while (fgets(ptr, n, f) > 0) {
+		//printf("<br>line: %s\n", line);//debugging
                 if (strncmp(line, usr, strlen(line)-1) == 0
 		  && strlen(line)-1 == strlen(usr)
 		) {
 			//printf("usr is the same\n");//debugging
-			getline(&ptr, &n, f);
+			fgets(ptr, n, f);
 			if (strncmp(line, pwd, strlen(line)-1) == 0
 			  && strlen(line) == strlen(pwd)
 			) {
@@ -119,9 +123,9 @@ int isValid(char *usr, char *pwd)
 				return 0;
 			}
                 } else {
-                        getline(&ptr, &n, f);
-                        getline(&ptr, &n, f);
-                        getline(&ptr, &n, f);
+                        fgets(ptr, n, f);
+                        fgets(ptr, n, f);
+                        fgets(ptr, n, f);
                         // user.txt has 4 lines per user :P
                 }
         }
@@ -132,7 +136,7 @@ int isValid(char *usr, char *pwd)
 void displayError(void)
 {
 
-	printf("%s%c%c\n","Content-Type:text/html;charset=iso-8859-1",13,10);
+	//printf("%s%c%c\n","Content-Type:text/html;charset=iso-8859-1",13,10);
 	printf("<head>\n<title>Authentification Failed</title>\n");
 	printf("<link href=\"http://cs.mcgill.ca/~ytamit/global.css\" rel=\"stylesheet\" type=\"text/css\">\n");
 	printf("</head>\n\n<body>\n");
@@ -142,5 +146,7 @@ void displayError(void)
 	printf("<a href=\"http://cs.mcgill.ca/~ytamit/login.html\">here</a>, or ");
 	printf("go back to the <a href=\"../index.html\">Home Page</a>\n");
 	printf("</body>\n");
+	
+	return;
 }
 
