@@ -64,7 +64,7 @@ int main(int argc, char *argv[])
 
 	//------Checking user/password pair-----
 
-	//printf("usr: %s; pwd: %s", inputUsrname, inputPasswd);//debugging
+	printf("usr: %s; pwd: %s", inputUsrname, inputPasswd);//debugging
 	if (isValid(inputUsrname, inputPasswd)) {
 		//printf("user/pass valid\n");//debugging
 		setenv("usr", inputUsrname, 1);
@@ -97,8 +97,8 @@ int main(int argc, char *argv[])
 int isValid(char *usr, char *pwd)
 {
 	char *ptr;
-	char line[100];
-	size_t n = 99;
+	char line[1000];
+	size_t n = 999;
 	FILE *f;
 
 	ptr = line;
@@ -106,7 +106,7 @@ int isValid(char *usr, char *pwd)
 	f = fopen("../users.txt", "rt");
 
 	while (fgets(ptr, n, f) > 0) {
-		//printf("line: %s\n", line);//debugging
+		//printf("<br>line: %s\n", line);//debugging
                 if (strncmp(line, usr, strlen(line)-1) == 0
 		  && strlen(line)-1 == strlen(usr)
 		) {
