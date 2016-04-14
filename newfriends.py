@@ -25,6 +25,31 @@ def getVariables(arguments) :
 
 #------------------------------------------
 
+# This function receives as input a list of names and a username.
+# It removes from the list the names that are in the user's list of friends.
+def removeDuplicates(listFriends, username) :
+	string = ""
+	duplicates = []
+	f = open("./friends.txt", "r")
+	data = f.readlines()
+	
+	for line in data :
+		n = len(username)
+		if line[:n+1] == ('$' + username) :
+			for friend in listFriends :
+				if line.find(friend, 0) >= 0 :
+					duplicates.append(friend)
+			# end of for friend loop
+			for friend in duplicates :
+				listFriends.remove(friend)
+			return listFriends
+	# end of for line loop
+
+	return listFriends
+
+# end of removeDuplicates
+	
+
 # This function will receive as input a list of names, and a string representing a username. 
 # It will add each friend of the list to the friends of the given user.
 # Tested, works
@@ -73,6 +98,9 @@ listVariables = getVariables(arguments)
 # Removing the username from listVariables (since we won't be adding it)
 username = arguments.getvalue("username")
 listVariables.remove("username")
+
+# Removing duplicates
+listVariables = removeDuplicates(listVariables, username)
 
 # Adding friends
 if listVariables : 
