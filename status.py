@@ -1,8 +1,15 @@
-import sys
+#!/usr/bin/python
+import cgi
+import cgitb
+cgitb.enable()
 
-if argv[2]!="":
+argv = cgi.FieldStorage()
+
+"""Checks if status is empty"""
+if argv.getvalue("status") != "":
 	statusFile = open("status.txt","a")
-	statusFile.write(str(sys.argv[1]) + " " + str(sys.argv[2))
+	statusFile.write(argv.getvalue("user") + " " + argv.getvalue("status"))
 	statusFile.close()
 
-"""call dashboard.py"""
+"""refreshes the dashboard by sending to a redirecting page"""
+refreshDashboard = open("refreshDash.html:)
