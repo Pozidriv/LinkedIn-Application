@@ -1,6 +1,6 @@
 #include <stdlib.h>
 #include <stdio.h>
-#include <strings.h>
+#include <string.h>
 #include "decd_post.h"
 
 void displayError1() //Error page when fields left blank
@@ -63,6 +63,16 @@ int main(int argc, char *argv[])
 	//make the inputs readable
 	char input[5000], data[5000];
 	char username[5000], psswd[5000], jbdsc[5000], fullnm[5000];
+	int n;
+	
+	if (getenv("CONTENT_LENGTH") != NULL)
+		n = atoi(getenv("CONTENT_LENGTH"));
+	else
+	{	
+		displayError1();
+		return 1;
+	}
+
 	fgets(input, n+1, stdin);
 	unencode(input, input + n, data);
 	getVariable(data, "user", username);
