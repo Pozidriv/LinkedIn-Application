@@ -1,5 +1,4 @@
 #!/usr/bin/python
-import urllib2
 import cgitb
 import cgi
 import sys
