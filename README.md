@@ -10,7 +10,7 @@ The css stylesheet is here: http://cs.mcgill.ca/~ytamit/global.css
 NOTES: do not forget to compile on the freebsd or cgi server; it won't work otherwise.
 Put all your binary .cgi executables in the cgi-bin directory
 
-Finished: login.c, login.html, newfriends.py, seefriends.c, makefriends.py, makefriends.html
+Finished: login.c, login.html, newfriends.py, seefriends.c, makefriends.py, makefriends.html, seefriends.html, seefriends.c
 
 
 
@@ -18,6 +18,6 @@ Workload separation:
 
 Samuel: dashboard.html, dashboard.py, status.py, register.c
 
-Dahana: makefriends.py, makeafriend.html, seefriends.html, seefriends.c
+Dahana: makefriends.py, makefriends.html, seefriends.html, seefriends.c
 
 Pozidriv: login.c, login.html, newfriends.py
