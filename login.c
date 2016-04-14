@@ -64,7 +64,7 @@ int main(int argc, char *argv[])
 
 	//------Checking user/password pair-----
 
-	printf("usr: %s; pwd: %s", inputUsrname, inputPasswd);//debugging
+	//printf("usr: %s; pwd: %s", inputUsrname, inputPasswd);//debugging
 	if (isValid(inputUsrname, inputPasswd)) {
 		//printf("user/pass valid\n");//debugging
 		setenv("usr", inputUsrname, 1);
