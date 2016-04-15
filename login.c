@@ -144,13 +144,13 @@ void displayError(void)
 	printf("<html>\n");
 
 	printf("<head>\n<title>Authentification Failed</title>\n");
-	printf("<link href=\"http://cs.mcgill.ca/~ytamit/global.css\" rel=\"stylesheet\" type=\"text/css\">\n");
+	printf("<link href=\"http://cs.mcgill.ca/~djosep13/global.css\" rel=\"stylesheet\" type=\"text/css\">\n");
 	printf("</head>\n\n<body>\n");
 	printf("<h1>Error</h1>\n");
 	printf("<p>The credentials you have entered are invalid.<br>\n");
 	printf("Please try again by clicking ");
 	printf("<a href=\"http://cs.mcgill.ca/~ytamit/login.html\">here</a>, or ");
-	printf("go back to the <a href=\"../index.html\">Home Page</a>\n");
+	printf("go back to the <a href=\"http://cs.mcgill.ca/~ytamit/index.html\">Home Page</a>\n");
 	printf("</body>\n");
 	printf("</html>");
 	
@@ -162,10 +162,10 @@ void displayValid(char *username)
 
 	printf("<html>\n");
 	printf("<head>\n<title>Login Successful</title>\n");
-	printf("<link href=\"http://cs.mcgill.ca/~ytamit/global.css\" rel=\"stylesheet\" type=\"text/css\">\n");
+	printf("<link href=\"http://cs.mcgill.ca/~djosep13/global.css\" rel=\"stylesheet\" type=\"text/css\">\n");
 	printf("</head>\n\n<body>\n");
 	printf("<h1>Login was successful!</h1>\n");
-	printf("<form name=\"dashboard\" action=\"http://cs.mcgill.ca/~sgrego15/LinkedIn-Application/dashboard.py\" method=\"post\">\n");
+	printf("<form name=\"dashboard\" action=\"http://cs.mcgill.ca/~djosep13/dashboard.py\" method=\"post\">\n");
 	printf("<input type=\"hidden\" name=\"username\" value=\"%s\">\n", username);
         printf("<input type=\"submit\" value=\"To my Dashboard!\">\n</form>\n");
 	printf("</body>\n");

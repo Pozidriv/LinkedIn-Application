@@ -1,5 +1,5 @@
 #!/usr/bin/python
-
+import urllib
 import sys
 import os
 import cgitb
@@ -30,7 +30,7 @@ def Catalog():
 # open the users.txt file
 
     try:
-        data = open("users.txt", "r")
+        data = open("./users.txt", "r")
     
     except IOError:
         print "Please tell it to your litterate grandmas. Code : IOError - makefriends.py - open users.txt"
@@ -39,7 +39,7 @@ def Catalog():
 # open the makefriends.html file
 
     try:
-        htmlfile = open("makefriends.html", "r")
+        htmlfile = urllib.urlopen("http://cs.mcgill.ca/~sgrego15/makefriends.html", "r")
     
     except IOError:
         print "Please tell it to your litterate grandmas. Code : IOError - makefriends.py - open makefriends.html"
@@ -120,7 +120,7 @@ def Catalog():
             
 
     data.close()
-    htmlfile.close()
+    # htmlfile.close()
 
 
 

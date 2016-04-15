@@ -1,4 +1,5 @@
 #!/usr/bin/python
+import urllib
 import cgitb
 import cgi
 import sys
@@ -66,7 +67,7 @@ def addFriends(listFriends, username) :
 	if index == -1 :
 		print "Error, username could not be found."
 		print "<br>Username was: ", username
-		return -1
+		sys.exit()
 	else :
 		# We are looking for the end of the line starting with the username
 		index = data.find('\n', index)
@@ -106,7 +107,7 @@ listVariables = removeDuplicates(listVariables, username)
 if listVariables : 
 	addFriends(listVariables, username)
 
-	data = open("./success_addfriends.html").read()
+	data = urllib.urlopen("http;//cs.mcgill.ca/~sgrego15/success_addfriends.html").read()
 
 	index = data.find("$")
 	before = data[:index]
@@ -115,7 +116,7 @@ if listVariables :
 	
 	print output
 else :
-	data = open("./error_noUserSel.html").read()
+	data = urllib.urlopen("http://cs.mcgill.ca/~sgrego15/error_noUserSel.html").read()
 
 	index = data.find("$")
 	before = data[:index]

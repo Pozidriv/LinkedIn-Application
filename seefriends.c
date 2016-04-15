@@ -112,7 +112,7 @@ void getFriends(char *user){
     
     
     
-    file_ptr = fopen("http://cs.mcgill.ca/~sgrego15/friends.txt", "rt");
+    file_ptr = fopen("../friends.txt", "rt");
     
     
     // just in case... Throw an error page
@@ -170,7 +170,7 @@ void getFriends(char *user){
 void listFriends(char *user, char *friends){
     
     
-    FILE *html_ptr = fopen("http://cs.mcgill.ca/~ytamit/seefriends.html", "rt");
+    FILE *html_ptr = fopen("http://cs.mcgill.ca/~sgrego15/seefriends.html", "rt");
     char html_line[2048];
     char *putRadio = "RADIOBUTTONS\n";
     char *putLINK = "value=\"USERNAME\"";
@@ -250,7 +250,7 @@ void listFriends(char *user, char *friends){
 void friendProfile(char *user, char *friend){
     FILE *profile_ptr;
     char line[2048];
-    profile_ptr = fopen("http://cs.mcgill.ca/~sgrego15/users.txt", "rt");
+    profile_ptr = fopen("../users.txt", "rt");
     
     // just in case...
     
@@ -297,7 +297,7 @@ void friendProfile(char *user, char *friend){
         else {
             FILE *html_ptr;
             char html_line[2048];
-            html_ptr = fopen("../LinkedIn-Application/profile.html", "rt");
+            html_ptr = fopen("http://cs.mcgill.ca/~ytamit/profile.html", "rt");
             char *putUSERNAME ="USERNAME\n";
             char *putFULLNAME ="FULLNAME\n";
             char *putJOB = "JOB\n";
@@ -392,7 +392,7 @@ void errorMessage(int error, char *user){
         
         printf("<html> \n  <head> \n");
 	printf("<title> See friends </title> \n");
-	printf("<link href=\"http://cgi.cs.mcgill.ca/~djosep13/LinkedIn-Application/global.css\" rel=\"stylesheet\" type=\"text/css\"> \n");     
+	printf("<link href=\"http://cgi.cs.mcgill.ca/~djosep13/global.css\" rel=\"stylesheet\" type=\"text/css\"> \n");     
 	printf("</head> \n <body> \n");
 
 
@@ -409,7 +409,7 @@ void errorMessage(int error, char *user){
         printf("You do not have friends for the moment. You can go back to your dashboard to access makefriends page<br/><br/>\n");
         printf("<form name=\"welcome page\" action=\"http://cs.mcgill.ca/~ytamit/index.html\">\n");
 	printf("<input type=\"submit\" value=\"Back to Welcome Page\"> </form>\n");
-	printf("<form name=\"dashboard\" action=\"http://cs.mcgill.ca/~sgrego15/LinkedIn-Application/dashboard.py\" method=\"post\">\n");
+	printf("<form name=\"dashboard\" action=\"http://cs.mcgill.ca/~djosep13/dashboard.py\" method=\"post\">\n");
 	printf("<input type=\"hidden\" name=\"username\" value=\"%s\">\n", user);
 	printf(" <input type=\"submit\" value=\"Back to my Dashboard\"></form>\n");
         printf("</body>\n");

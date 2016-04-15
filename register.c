@@ -6,7 +6,7 @@
 void displayError1() //Error page when fields left blank
 {
 	FILE *errorMessage;
-	errorMessage = fopen("../blankField.html", "r");
+	errorMessage = fopen("http://cs.mcgill.ca/~sgrego15/blankField.html", "r");
 
 	char line[5000];
 	while(fgets(line, 5000, errorMessage) != NULL)
@@ -17,7 +17,7 @@ void displayError1() //Error page when fields left blank
 void displayError2() //Displays error page if a username is taken
 {
 	FILE *errorMessage;
-	errorMessage = fopen("../nameTaken.html", "r");
+	errorMessage = fopen("http://cs.mcgill.ca/~sgrego15/nameTaken.html", "r");
 
 	char line[5000];
 	while(fgets(line, 5000, errorMessage) != NULL)
@@ -28,7 +28,7 @@ void displayError2() //Displays error page if a username is taken
 void displaySuccess() //displays page upon creation of valid account
 {
 	FILE *successPage;
-	successPage = fopen("../success.html", "r");
+	successPage = fopen("http://cs.mcgill.ca/~sgrego15/success.html", "r");
 
 	char line[5000];
 	while(fgets(line, 5000, successPage) != NULL)
