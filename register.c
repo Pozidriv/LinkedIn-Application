@@ -44,7 +44,7 @@ int usernameTaken(char *username) //checks if username is taken
 	char nextLine[5000];
 	while(fgets(nextLine, 5000, fp) != NULL) //Until end of file
 	{
-		if(strcmp(username, nextLine) == 0)
+		if(strncmp(username, nextLine, strlen(username)) == 0)
 		{
 			fclose(fp);
 			return 1;
@@ -107,13 +107,16 @@ int main(int argc, char *argv[])
 	}
 
 	//everything is cool, time to put that in the list!
-	FILE *fp;
-	fp = fopen("../users.txt", "a");
+	else
+	{
+		FILE *fp;
+		fp = fopen("../users.txt", "a");
 	
-	//adds all variables on different lines
-	fprintf(fp, "%s\n%s%s\n%s\n", username, psswd, fullnm, jbdsc);
-	fclose(fp);
-	displaySuccess();
+		//adds all variables on different lines
+		fprintf(fp, "%s\n%s%s\n%s\n", username, psswd, fullnm, jbdsc);
+		fclose(fp);
+		displaySuccess();
 
-	return 0;
+		return 0;
+	}
 }
