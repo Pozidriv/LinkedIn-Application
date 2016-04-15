@@ -12,6 +12,9 @@ int isValid(char *usr, char *pwd);
 //displays the error page
 void displayError(void);
 
+//displays the page with the link to dashboard
+void displayValid(char *username);
+
 /*************************************************************************/
 
 
@@ -64,11 +67,12 @@ int main(int argc, char *argv[])
 
 	//------Checking user/password pair-----
 
-	printf("usr: %s; pwd: %s", inputUsrname, inputPasswd);//debugging
+	//printf("usr: %s; pwd: %s", inputUsrname, inputPasswd);//debugging
 	if (isValid(inputUsrname, inputPasswd)) {
 		//printf("user/pass valid\n");//debugging
-		setenv("usr", inputUsrname, 1);
-		system("./dashboard.cgi $usr");
+		//setenv("usr", inputUsrname, 1);
+		//system("./dashboard.cgi $usr");
+		displayValid(inputUsrname);
 		//arr[0] = inputUsrname;
 		//execv("./dashboard.cgi", arr);
 	} else displayError();
@@ -137,6 +141,8 @@ void displayError(void)
 {
 
 	//printf("%s%c%c\n","Content-Type:text/html;charset=iso-8859-1",13,10);
+	printf("<html>\n");
+
 	printf("<head>\n<title>Authentification Failed</title>\n");
 	printf("<link href=\"http://cs.mcgill.ca/~ytamit/global.css\" rel=\"stylesheet\" type=\"text/css\">\n");
 	printf("</head>\n\n<body>\n");
@@ -146,7 +152,22 @@ void displayError(void)
 	printf("<a href=\"http://cs.mcgill.ca/~ytamit/login.html\">here</a>, or ");
 	printf("go back to the <a href=\"../index.html\">Home Page</a>\n");
 	printf("</body>\n");
+	printf("</html>");
 	
 	return;
 }
 
+void displayValid(char *username)
+{
+
+	printf("<html>\n");
+	printf("<head>\n<title>Login Successful</title>\n");
+	printf("<link href=\"http://cs.mcgill.ca/~ytamit/global.css\" rel=\"stylesheet\" type=\"text/css\">\n");
+	printf("</head>\n\n<body>\n");
+	printf("<h1>Login was successful!</h1>\n");
+	printf("<form name=\"dashboard\" action=\"http://cs.mcgill.ca/~sgrego15/LinkedIn-Application/dashboard.py\" method=\"post\">\n");
+	printf("<input type=\"hidden\" name=\"username\" value=\"%s\">\n", username);
+        printf("<input type=\"submit\" value=\"To my Dashboard!\">\n</form>\n");
+	printf("</body>\n");
+	printf("</html>");
+}
