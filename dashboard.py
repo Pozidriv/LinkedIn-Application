@@ -1,4 +1,5 @@
 #!/usr/bin/python
+import urllib
 import sys
 import os
 import cgi
@@ -14,7 +15,7 @@ def displayStatuses(friends, username):
 		friends.append(username)
 		
 	try:
-		statusFile = open("./status.txt","r")
+		statusFile = urllib.urlopen("./status.txt","r")
 	except IOError:
 		print "Didn't work"
 		sys.exit()
@@ -53,7 +54,7 @@ friendFile.close()
 
 #This is the part that displays the page
 try:
-	dashFile = urllib.urlopen("http://cs.mcgill.ca/~djosep13/dashboard.html","r")
+	dashFile = urllib.urlopen("./dashboard.html","r")
 except IOError:
 	print "no dash"
 	sys.exit()
@@ -61,5 +62,5 @@ except IOError:
 dash = dashFile.readlines()
 for line in dash:
 	newLine = line.replace("Name here", username)
-	newLine = newLine.replace("Statuses here", displayStatuses(friendList, username)
+	newLine = newLine.replace("Statuses here", displayStatuses(friendList, username))
 	print newLine
