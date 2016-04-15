@@ -1,5 +1,4 @@
 #!/usr/bin/python
-import urllib
 import cgi
 import cgitb
 import sys
@@ -23,7 +22,7 @@ if argv.getvalue("status") != None:
 
 #Refreshes the dashboard by sending to a redirecting page
 try:
-	refreshDashboard = urllib.urlopen("http://cs.mcgill.ca/~sgrego15/refreshDash.html")
+	refreshDashboard = open("./refreshDash.html")
 except IOError:
 	print "Updates no open"
 	sys.exit()

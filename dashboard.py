@@ -53,7 +53,7 @@ friendFile.close()
 
 #This is the part that displays the page
 try:
-	dashFile = urllib.urlopen("http://cs.mcgill.ca/~ytamit/dashboard.html","r")
+	dashFile = urllib.urlopen("http://cs.mcgill.ca/~djosep13/dashboard.html","r")
 except IOError:
 	print "no dash"
 	sys.exit()

@@ -107,7 +107,7 @@ listVariables = removeDuplicates(listVariables, username)
 if listVariables : 
 	addFriends(listVariables, username)
 
-	data = urllib.urlopen("http;//cs.mcgill.ca/~sgrego15/success_addfriends.html").read()
+	data = open("./success_addfriends.html").read()
 
 	index = data.find("$")
 	before = data[:index]
@@ -116,7 +116,7 @@ if listVariables :
 	
 	print output
 else :
-	data = urllib.urlopen("http://cs.mcgill.ca/~sgrego15/error_noUserSel.html").read()
+	data = open("./error_noUserSel.html").read()
 
 	index = data.find("$")
 	before = data[:index]
