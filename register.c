@@ -81,20 +81,17 @@ int main(int argc, char *argv[])
 	getVariable(data, "passwd", psswd);
 	getVariable(data, "fullname", fullnm);
 	getVariable(data, "jobdesc", jbdsc);
-<<<<<<< HEAD
 */
 	char *username = "test";
 	char * psswd = "test";
 	char *fullnm = "test";
 	char *jbdsc = "test";
-=======
 
 	printf("%s%c%c\n","Content-Type:text/html;charset=iso-8859-1",13,10);
 	//printf("%s,%s,%s,%s\n", username, psswd, fullnm, jbdsc);
 	
 
 
->>>>>>> 8962e7f877b38566c759d5c674cae1550a8d5b02
 	//checks if any field left blank
 	if(username == NULL || psswd == NULL || fullnm == NULL || jbdsc == NULL)
 	{
