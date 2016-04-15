@@ -10,7 +10,10 @@ print "Content-Type: text/html"
 print
 
 #Method that returns the 20 most recent statuses made by friends in html format
-def displayStatuses(friends):
+def displayStatuses(friends, username):
+	if friends == []:
+		friends.append(username)
+		
 	try:
 		statusFile = urllib.urlopen("http://cs.mcgill.ca/~sgrego15/status.txt","r")
 	except IOError:
@@ -46,7 +49,7 @@ for line in friends:
 	if line.find("$"+username):
 		newLine = line.replace(" ", ",", 1)
 		newLine = newLine.replace("$", "")
-		friendList += newLine.split(",")
+		friendList.extend(newLine.split(","))
 friendFile.close()
 
 #This is the part that displays the page
@@ -59,5 +62,5 @@ except IOError:
 dash = dashFile.readlines()
 for line in dash:
 	newLine = line.replace("Name here", username)
-	newLine = newLine.replace("Statuses here", displayStatuses(friendList))
+	newLine = newLine.replace("Statuses here", displayStatuses(friendList, username)
 	print newLine
