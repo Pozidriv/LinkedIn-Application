@@ -62,5 +62,5 @@ except IOError:
 dash = dashFile.readlines()
 for line in dash:
 	newLine = line.replace("Name here", username)
-	newLine = newLine.replace("Statuses here", displayStatuses(friendList))
+	newLine = newLine.replace("Statuses here", displayStatuses(friendList, username)
 	print newLine
