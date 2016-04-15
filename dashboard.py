@@ -3,14 +3,18 @@ import cgi
 import cgitb
 cgitb.enable()
 
-"""args.getvalue("nameOfVar) to acces list of variables"""
+"""Method that returns the 20 most recent statuses made by friends in html format"""
 def displayStatuses(friends):
+	numberOfStatuses = 0
+	statuses = "<p>"
 	status = open("status.txt","r")
 	for line in reversed(status.readlines()):
 		splittedStatus = line.split(' ', 1)
-		if splittedStatus[0] in friends:
-			"""add splitted line to a list"""	
-def replace
+		if splittedStatus[0] in friends and i < 20:
+			statuses += "<br />" + splittedStatus[0].replace("$", "") + " said:<br /> " + splittedStatus[1]
+			numberOfStatuses++
+	statuses += "</p>"
+	return statuses
 
 argv = cgi.FieldStorage()
 username = argv.getvalue("name")
@@ -27,6 +31,6 @@ friends.close()
 dashFile = open("dashboard.html","r")
 dash = dashFile.readlines()
 for line in dash:
-	line.replace("Name here", username)
-	line.replace("Statuses here", displayStatuses(friendList))
+	line = line.replace("Name here", username)
+	line = line.replace("Statuses here", displayStatuses(friendList))
 	print line
