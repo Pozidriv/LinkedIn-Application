@@ -112,7 +112,7 @@ void getFriends(char *user){
     
     
     
-    file_ptr = fopen("../LinkedIn-Application/friends.txt", "rt");
+    file_ptr = fopen("http://cs.mcgill.ca/~sgrego15/friends.txt", "rt");
     
     
     // just in case... Throw an error page
@@ -170,7 +170,7 @@ void getFriends(char *user){
 void listFriends(char *user, char *friends){
     
     
-    FILE *html_ptr = fopen("../LinkedIn-Application/seefriends.html", "rt");
+    FILE *html_ptr = fopen("http://cs.mcgill.ca/~ytamit/seefriends.html", "rt");
     char html_line[2048];
     char *putRadio = "RADIOBUTTONS\n";
     char *putLINK = "value=\"USERNAME\"";
@@ -250,7 +250,7 @@ void listFriends(char *user, char *friends){
 void friendProfile(char *user, char *friend){
     FILE *profile_ptr;
     char line[2048];
-    profile_ptr = fopen("../LinkedIn-Application/users.txt", "rt");
+    profile_ptr = fopen("http://cs.mcgill.ca/~sgrego15/users.txt", "rt");
     
     // just in case...
     
