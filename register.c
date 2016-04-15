@@ -76,10 +76,15 @@ int main(int argc, char *argv[])
 	fgets(input, n+1, stdin);
 	unencode(input, input + n, data);
 	getVariable(data, "user", username);
-	getVariable(data, "passswd", psswd);
+	getVariable(data, "passwd", psswd);
 	getVariable(data, "fullname", fullnm);
 	getVariable(data, "jobdesc", jbdsc);
+
+	printf("%s%c%c\n","Content-Type:text/html;charset=iso-8859-1",13,10);
+	//printf("%s,%s,%s,%s\n", username, psswd, fullnm, jbdsc);
 	
+
+
 	//checks if any field left blank
 	if(username == NULL || psswd == NULL || fullnm == NULL || jbdsc == NULL)
 	{
@@ -102,5 +107,6 @@ int main(int argc, char *argv[])
 	fprintf(fp, "%s\n%s\n%s\n%s\n", username, psswd, fullnm, jbdsc);
 	fclose(fp);
 	displaySuccess();
+
 	return 0;
 }
