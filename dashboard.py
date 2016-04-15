@@ -1,5 +1,4 @@
 #!/usr/bin/python
-import urllib
 import sys
 import os
 import cgi
@@ -15,7 +14,7 @@ def displayStatuses(friends, username):
 		friends.append(username)
 		
 	try:
-		statusFile = urllib.urlopen("http://cs.mcgill.ca/~sgrego15/status.txt","r")
+		statusFile = open("./status.txt","r")
 	except IOError:
 		print "Didn't work"
 		sys.exit()
@@ -37,7 +36,7 @@ username = arguments.getvalue("username")
 friendList = []
 
 try:
-	friendFile = urllib.urlopen("http://cs.mcgill.ca/~sgrego15/friends.txt","r")
+	friendFile = urllib.urlopen("./friends.txt","r")
 except IOError:
 	print "Friends no work"
 	sys.exit()

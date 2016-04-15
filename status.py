@@ -1,4 +1,5 @@
 #!/usr/bin/python
+import urllib
 import cgi
 import cgitb
 import sys
@@ -13,7 +14,7 @@ argv = cgi.FieldStorage()
 #Checks if status is empty. If not, appends it to the status file
 if argv.getvalue("status") != None:
 	try:
-		statusFile = open("status.txt","a")
+		statusFile = open("./status.txt","a")
 	except IOError:
 		print "status no open"
 		sys.exit()
@@ -22,10 +23,10 @@ if argv.getvalue("status") != None:
 
 #Refreshes the dashboard by sending to a redirecting page
 try:
-	refreshDashboard = open("refreshDash.html")
+	refreshDashboard = urllib.urlopen("http://cs.mcgill.ca/~sgrego15/refreshDash.html")
 except IOError:
 	print "Updates no open"
 	sys.exit()
 for line in refreshDashboard:
 	print line.replace("Name here", argv.getvalue("user"))
-refreshDashboard.close()
+# refreshDashboard.close()
