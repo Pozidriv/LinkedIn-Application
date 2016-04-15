@@ -12,4 +12,6 @@ if argv.getvalue("status") != "":
 	statusFile.close()
 
 """refreshes the dashboard by sending to a redirecting page"""
-refreshDashboard = open("refreshDash.html:)
+refreshDashboard = open("refreshDash.html")
+for line in refreshDashboard:
+	print line
