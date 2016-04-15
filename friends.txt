@@ -1,19 +1,19 @@
-$Crepeaus apprentice,Karatsuba Master,MergeSort Lord,gagarine,Bob,Simbas,Casper,maryy,Radix Sorts CEO,aniouche,
+$Crepeaus apprentice,Karatsuba Master,MergeSort Lord,gagarine,Bob,Simbas,Casper,maryy,Radix Sorts CEO,aniouche
 
-$Karatsuba Master,MergeSort Lord,gagarine,Bob,Simbas,Casper,maryy,Radix Sorts CEO,Crepeaus apprentice,aniouche,
+$Karatsuba Master,MergeSort Lord,gagarine,Bob,Simbas,Casper,maryy,Radix Sorts CEO,Crepeaus apprentice,aniouche
 
-$MergeSort Lord,gagarine,Bob,Simbas,Casper,maryy,Radix Sorts CEO,Crepeaus apprentice,Karatsuba Master,aniouche,
+$MergeSort Lord,gagarine,Bob,Simbas,Casper,maryy,Radix Sorts CEO,Crepeaus apprentice,Karatsuba Master,aniouche
 
-$gagarine,Bob,Simbas,Casper,maryy,Radix Sorts CEO,Crepeaus apprentice,Karatsuba Master,MergeSort Lord,aniouche,
+$gagarine,Bob,Simbas,Casper,maryy,Radix Sorts CEO,Crepeaus apprentice,Karatsuba Master,MergeSort Lord,aniouche
 
-$Bob,Simbas,Casper,maryy,Radix Sorts CEO,Crepeaus apprentice,Karatsuba Master,MergeSort Lord,gagarine,aniouche,
+$Bob,Simbas,Casper,maryy,Radix Sorts CEO,Crepeaus apprentice,Karatsuba Master,MergeSort Lord,gagarine,aniouche
 
-$Simbas,Casper,maryy,Radix Sorts CEO,Crepeaus apprentice,Karatsuba Master,MergeSort Lord,gagarine,Bob,aniouche,
+$Simbas
 
-$Casper,maryy,Radix Sorts CEO,Crepeaus apprentice,Karatsuba Master,MergeSort Lord,gagarine,Bob,Simbas,aniouche,
+$Casper,maryy,Radix Sorts CEO,Crepeaus apprentice,Karatsuba Master,MergeSort Lord,gagarine,Bob,Simbas,aniouche
 
-$maryy,Radix Sorts CEO,Crepeaus apprentice,Karatsuba Master,MergeSort Lord,gagarine,Bob,Simbas,Casper,aniouche,
+$maryy,Radix Sorts CEO,Crepeaus apprentice,Karatsuba Master,MergeSort Lord,gagarine,Bob,Simbas,Casper,aniouche
 
-$Radix Sorts CEO,Crepeaus apprentice,Karatsuba Master,MergeSort Lord,gagarine,Bob,Simbas,Casper,maryy,aniouche,
+$Radix Sorts CEO,Crepeaus apprentice,Karatsuba Master,MergeSort Lord,gagarine,Bob,Simbas,Casper,maryy,aniouche
 
-$aniouche,Radix Sorts CEO,Crepeaus apprentice,Karatsuba Master,MergeSort Lord,gagarine,Bob,Simbas,Casper,maryy,
+$aniouche,Radix Sorts CEO,Crepeaus apprentice,Karatsuba Master,MergeSort Lord,gagarine,Bob,Simbas,Casper,maryy

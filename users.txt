@@ -1,16 +1,12 @@
-USERNAME
-PASSWORD
-FULL NAME
-JOB DESCRIPTION
 aniouche
 bonjourmonde
 Ania S.
 Professional couscous eater.Professional couscous eater! Since 1990's How about some more words just to see how is this table? yes man. So I have a nose and eyes. Pretty usefule to eat couscous
-Radix Sorts CEO
+RadixSortsCEO
 helloworld
 Dahana Joseph
 Student at McGill. The one behind what you see now. What you see right now is the reason why i still did not start the COMP 250 hw : i am struggling more than you.
-Crepeaus apprentice
+CrepeausApprentice
 byeworld
 Ilyas A.
 Software Engineering student, futur propriétaire d’une Audi.  I got you bro. ;)
@@ -34,11 +30,11 @@ maryy
 noo
 Mary De niro
 Maried to a rich man
-Karatsuba Master
+KaratsubaMaster
 something
 Fiona H.
 Actually struggling with the COMP 250 homework (dahana support you)
-MergeSort Lord
+MergeSortLord
 somethingelse
 Tharsan
 Also struggling for comp 250 (dahana supports you)
