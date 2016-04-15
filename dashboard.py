@@ -1,4 +1,5 @@
 #!/usr/bin/python
+import urllib
 import sys
 import os
 import cgi
@@ -11,7 +12,7 @@ print
 #Method that returns the 20 most recent statuses made by friends in html format
 def displayStatuses(friends):
 	try:
-		statusFile = open("status.txt","r")
+		statusFile = urllib.urlopen("http://cs.mcgill.ca/~sgrego15/status.txt","r")
 	except IOError:
 		print "Didn't work"
 		sys.exit()
@@ -33,7 +34,7 @@ username = arguments.getvalue("username")
 friendList = []
 
 try:
-	friendFile = open("friends.txt","r")
+	friendFile = urllib.urlopen("http://cs.mcgill.ca/~sgrego15/friends.txt","r")
 except IOError:
 	print "Friends no work"
 	sys.exit()
@@ -50,7 +51,7 @@ friendFile.close()
 
 #This is the part that displays the page
 try:
-	dashFile = open("dashboard.html","r")
+	dashFile = urllib.urlopen("http://cs.mcgill.ca/~ytamit/dashboard.html","r")
 except IOError:
 	print "no dash"
 	sys.exit()
