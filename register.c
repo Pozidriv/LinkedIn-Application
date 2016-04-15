@@ -61,10 +61,12 @@ int usernameTaken(char *username) //checks if username is taken
 int main(int argc, char *argv[])
 {
 	//make the inputs readable
-	char input[5000], data[5000];
+/*	char input[5000], data[5000];
 	char username[5000], psswd[5000], jbdsc[5000], fullnm[5000];
 	int n;
 	
+	printf("%s%c%c\n","Content-Type:text/html;charset=iso-8859-1",13,10);
+
 	if (getenv("CONTENT_LENGTH") != NULL)
 		n = atoi(getenv("CONTENT_LENGTH"));
 	else
@@ -79,6 +81,11 @@ int main(int argc, char *argv[])
 	getVariable(data, "passwd", psswd);
 	getVariable(data, "fullname", fullnm);
 	getVariable(data, "jobdesc", jbdsc);
+*/
+	char *username = "test";
+	char * psswd = "test";
+	char *fullnm = "test";
+	char *jbdsc = "test";
 
 	printf("%s%c%c\n","Content-Type:text/html;charset=iso-8859-1",13,10);
 	//printf("%s,%s,%s,%s\n", username, psswd, fullnm, jbdsc);
