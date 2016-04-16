@@ -67,7 +67,7 @@ def addFriends(listFriends, username) :
 	if index == -1 :
 		f.close()
 		f = open("./friends.txt", "a")
-		f.write(username + "," + ",".join(listFriends))
+		f.write("\n" + username + "," + ",".join(listFriends))
 		f.close()
 		return 0
 	else :
