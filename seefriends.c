@@ -140,17 +140,18 @@ void getFriends(char *user){
         else {
             name = strtok(line, "$,\n");
             
-            if(strcmp(name,user)!=0){
+            if(name!=NULL && strcmp(name,user)!=0){
                 i++;
                 continue;
             }
             
         // If so, close the file, and call the listFriends with the full line of the friends.txt
-            else {
+            else if(strcmp(name,user)==0) {
                 fclose(file_ptr);
                 listFriends(user, friends);
                 return;
             }
+
         }
     }
 }
@@ -175,6 +176,8 @@ void listFriends(char *user, char *friends){
     char *putRadio = "RADIOBUTTONS\n";
     char *putLINK = "value=\"USERNAME\"";
     
+
+
     // if not able to open the file
     
     if(html_ptr==NULL){
@@ -191,7 +194,7 @@ void listFriends(char *user, char *friends){
     friends = strtok(NULL,"$,\n");
 	    
     // If the user does not have friend
-    if(friends==NULL){
+    if(friends==NULL ){
          errorMessage(NOFRIENDS, user);
          return;
      }
