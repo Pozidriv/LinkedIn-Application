@@ -170,7 +170,7 @@ void getFriends(char *user){
 void listFriends(char *user, char *friends){
     
     
-    FILE *html_ptr = fopen("http://cs.mcgill.ca/~sgrego15/seefriends.html", "rt");
+    FILE *html_ptr = fopen("../seefriends.html", "rt");
     char html_line[2048];
     char *putRadio = "RADIOBUTTONS\n";
     char *putLINK = "value=\"USERNAME\"";
@@ -297,7 +297,7 @@ void friendProfile(char *user, char *friend){
         else {
             FILE *html_ptr;
             char html_line[2048];
-            html_ptr = fopen("http://cs.mcgill.ca/~ytamit/profile.html", "rt");
+            html_ptr = fopen("../profile.html", "rt");
             char *putUSERNAME ="USERNAME\n";
             char *putFULLNAME ="FULLNAME\n";
             char *putJOB = "JOB\n";
