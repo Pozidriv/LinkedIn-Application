@@ -65,8 +65,11 @@ def addFriends(listFriends, username) :
 	index = data.find(username)
 
 	if index == -1 :
+		f.close()
+		f = open("./friends.txt", "a")
 		f.append(username + "," + ",".join(listFriends))
 		f.close()
+		return 0
 	else :
 		# We are looking for the end of the line starting with the username
 		index = data.find('\n', index)
