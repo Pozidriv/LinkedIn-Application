@@ -67,7 +67,7 @@ def addFriends(listFriends, username) :
 	if index == -1 :
 		f.close()
 		f = open("./friends.txt", "a")
-		f.append(username + "," + ",".join(listFriends))
+		f.write(username + "," + ",".join(listFriends))
 		f.close()
 		return 0
 	else :
@@ -77,7 +77,7 @@ def addFriends(listFriends, username) :
 	if index == -1 : # eof has been reached
 		f.close()
 		f = open("./friends.txt", "a")
-		f.append("," + ",".join(listFriends))
+		f.write("," + ",".join(listFriends))
 		f.close()
 	else :
 		before = data[:index]
