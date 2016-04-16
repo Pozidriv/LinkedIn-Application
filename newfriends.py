@@ -65,9 +65,8 @@ def addFriends(listFriends, username) :
 	index = data.find(username)
 
 	if index == -1 :
-		print "Error, username could not be found."
-		print "<br>Username was: ", username
-		sys.exit()
+		f.append(username + "," + ",".join(listFriends))
+		f.close()
 	else :
 		# We are looking for the end of the line starting with the username
 		index = data.find('\n', index)
